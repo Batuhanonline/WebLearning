@@ -1,0 +1,134 @@
+<%-include('./inc/site-head')%> 
+
+<section class="login">
+    <div class="container">
+        <div class="row">
+            <div class="col-9">
+                <div class="card">
+                    Duyurular
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="btn-group-vertical btn-group-lg">
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginStudent">
+                        Öğrenci Giriş
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginTeacher">
+                        Öğretmen Giriş
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginAcademy">
+                        Akademi Giriş
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Öğrenci Giriş Modal -->
+
+<div class="modal fade" id="loginStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Öğrenci Giriş</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <form id="student-login" >
+            <div class="mb-3">
+                <div class="input-group">
+                    <div class="input-group-text">ID</div>
+                    <input type="text" class="form-control" id="studentid" placeholder="Öğrenci ID">
+                    </div>
+                </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Şifre</label>
+              <input type="password" class="form-control" id="studentpass">
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Beni Hatırla</label>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-success ms-auto">Giriş</button>
+            </div>
+            
+          </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Öğretmen Giriş Modal -->
+
+<div class="modal fade" id="loginTeacher" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Öğretmen Giriş</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <form id="teacher-login">
+            <div class="mb-3">
+                <div class="input-group">
+                    <div class="input-group-text">ID</div>
+                    <input type="text" class="form-control" id="teacherid" placeholder="Öğretmen ID">
+                    </div>
+                </div>
+            <div class="mb-3">
+              <label for="teacherPassword" class="form-label">Şifre</label>
+              <input type="password" class="form-control" id="teacherpass">
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Beni Hatırla</label>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-success ms-auto">Giriş</button>
+            </div>
+            
+          </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Akademi Giriş Modal -->
+
+<div class="modal fade" id="loginAcademy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Akademi Giriş</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <form id="academy-login">
+            <div class="mb-3">
+                <div class="input-group">
+                    <div class="input-group-text">ID</div>
+                    <input type="text" class="form-control" id="academyid" placeholder="Kuruluş ID">
+                    </div>
+                </div>
+            <div class="mb-3">
+              <label for="academypass" class="form-label">Şifre</label>
+              <input type="password" class="form-control" id="academypass">
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Beni Hatırla</label>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-success ms-auto">Giriş</button>
+            </div>
+            
+          </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<%-include('./inc/site-footer')%> 
+
