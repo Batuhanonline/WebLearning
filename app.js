@@ -9,7 +9,6 @@ const Teacher = require('./models/teacher')
 const app = express()
 app.set('view engine','ejs')
 
-
 app.use(express.static('public'))
 app.use(morgan('tiny'))
 
