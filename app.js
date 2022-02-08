@@ -4,12 +4,14 @@ const mongoose = require('mongoose')
 
 const Academy = require('./models/academy')
 const Student = require('./models/student')
-const Teacher = require('./models/teacher')
+
+const teacherRoutes = require('./routes/teacherRoutes')
 
 const app = express()
 app.set('view engine','ejs')
 
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended:true }))
 app.use(morgan('tiny'))
 
 
@@ -21,38 +23,27 @@ mongoose.connect(dbURL,{
 .catch((err) => console.log(err))
 
 
+app.use('/ogretmen',teacherRoutes)
+
+
 app.get('/',(req,res) => {
     res.render('login')
 })
 
-app.get('/ogretmen', (req,res) => {   
-    res.render('teacherindex')
+app.get('/admin', (req,res) => {
+
 })
 
-app.get('/ogretmen/dersnotlari', (req,res) => {
-    res.render('teacherlessonnotes')
-})
 
-app.get('/ogretmen/dersicerikleri', (req,res) => {
-    res.render('teacherlessons')
-})
 
-app.get('/ogretmen/test', (req,res) => {
-    res.render('teachertest')
-})
-
-app.get('/ogretmen/arsiv', (req,res) => {
-    res.render('teacherarsiv')
-})
-
-app.get('/akademikayit', (req,res) => {
+app.get('/admin/akademikayit', (req,res) => {
     res.render('academyregister')
 })
 
-app.get('/ogretmenkayit', (req,res) => {
+app.get('/academy/ogretmenkayit', (req,res) => {
     res.render('teacherregister')
 })
 
-app.get('/ogrencikayit', (req,res) => {
+app.get('/academy/ogrencikayit', (req,res) => {
     res.render('studentregister')
 })
