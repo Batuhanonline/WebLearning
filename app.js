@@ -2,10 +2,10 @@ const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 
-const Academy = require('./models/academy')
-const Student = require('./models/student')
 
 const teacherRoutes = require('./routes/teacherRoutes')
+const authRoutes = require('./routes/authRoutes')
+const adminRoutes = require('./routes/adminRoutes')
 
 const app = express()
 app.set('view engine','ejs')
@@ -23,18 +23,9 @@ mongoose.connect(dbURL,{
 .catch((err) => console.log(err))
 
 
+app.use('/',authRoutes)
 app.use('/ogretmen',teacherRoutes)
-
-
-app.get('/',(req,res) => {
-    res.render('login')
-})
-
-app.get('/admin', (req,res) => {
-
-})
-
-
+app.use('/admin',adminRoutes)
 
 app.get('/admin/akademikayit', (req,res) => {
     res.render('academyregister')
