@@ -6,21 +6,7 @@ const createToken = (id) => {
     return jwt.sign({id}, 'jwtgizlikelime', {expiresIn: maxAge})
 }
 
-const admin_login_get = (req, res) => {
-    res.render('adminlogin')
-}
 
-const admin_login_post = async (req, res) => {
-    const { adminID, adminPassword } = req.body
-    try {
-        const admin = await Admin.login(adminID,adminPassword)
-        const token = createToken(admin._id)
-        res.cookie('token', token, {httpOnly: true, maxAge: maxAge * 1000 })
-        res.redirect('/admin/panel')
-    } catch (err) {
-        console.log(err)
-    }
-}
 
 const admin_register = (req, res) => {
     res.render('adminregister')
@@ -41,11 +27,14 @@ const admin_panel_get = (req, res) => {
     res.render('adminpanel')
 }
 
+const admin_logout_get = (req, res) => {
+    res.cookie('token', '', {maxAge:1})
+    res.redirect('/adminlogin')
+}
 
 module.exports = {
-    admin_login_get,
     admin_register,
     admin_register_post,
-    admin_login_post,
-    admin_panel_get
+    admin_panel_get,
+    admin_logout_get
 }
