@@ -10,13 +10,13 @@
             </div>
             <div class="col-3">
                 <div class="btn-group-vertical btn-group-lg">
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginStudent">
+                    <button class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#loginStudent">
                         Öğrenci Giriş
                     </button>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginTeacher">
                         Öğretmen Giriş
                     </button>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginAcademy">
+                    <button class="btn btn-primary" onclick="academyLocation()" data-bs-toggle="modal" data-bs-target="#loginAcademy">
                         Akademi Giriş
                     </button>
                 </div>
@@ -25,7 +25,13 @@
     </div>
 </section>
 
-<!-- Öğrenci Giriş Modal -->
+<script>
+  function academyLocation() {
+      window.location.href="/akademigiris";
+  }
+</script>
+
+<!--
 
 <div class="modal fade" id="loginStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog">
@@ -60,7 +66,7 @@
 </div>
 </div>
 
-<!-- Öğretmen Giriş Modal -->
+
 
 <div class="modal fade" id="loginTeacher" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog">
@@ -95,7 +101,7 @@
 </div>
 </div>
 
-<!-- Akademi Giriş Modal -->
+
 
 <div class="modal fade" id="loginAcademy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog">
@@ -109,12 +115,12 @@
             <div class="mb-3">
                 <div class="input-group">
                     <div class="input-group-text">ID</div>
-                    <input type="text" class="form-control" id="academyid" placeholder="Kuruluş ID">
+                    <input type="text" class="form-control" id="academyLoginID" placeholder="Kuruluş ID">
                     </div>
                 </div>
             <div class="mb-3">
-              <label for="academypass" class="form-label">Şifre</label>
-              <input type="password" class="form-control" id="academypass">
+              <label for="academyPassword" class="form-label">Şifre</label>
+              <input type="password" class="form-control" id="academyPassword">
             </div>
             <div class="mb-3 form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -128,7 +134,7 @@
     </div>
   </div>
 </div>
-</div>
+</div> -->
 
 <%-include('./inc/site-footer')%> 
 

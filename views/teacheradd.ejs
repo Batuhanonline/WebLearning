@@ -1,0 +1,16 @@
+<%-include('./inc/site-head')%> 
+
+<%-include('./inc/site-navbar-academy')%> 
+
+<section>
+    <form action="" method="post">
+        <input type="text" name="teacherName" placeholder="Öğretmen İsim" required><br>
+        <input type="text" name="teacherLoginID" placeholder="ID" required><br>
+        <input type="password" name="teacherPassword" placeholder="Şİfre" required><br>
+        <input type="checkbox" name="academyID" value="<%= academy._id %>">
+        <label for="academyID">Kayıt İşlemini Onaylayınız</label><br>
+        <input type="submit" value="Kayıt">
+    </form>
+</section>
+
+<%-include('./inc/site-footer.ejs')%> 

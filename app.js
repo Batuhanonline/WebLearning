@@ -7,7 +7,9 @@ const cookieParser = require('cookie-parser')
 const teacherRoutes = require('./routes/teacherRoutes')
 const authRoutes = require('./routes/authRoutes')
 const adminRoutes = require('./routes/adminRoutes')
-const {requireAuthAdmin} = require('./middlewares/adminAuthMiddleware')
+const academyRoutes = require('./routes/academyRoutes')
+const {requireAuthAdmin, checkAdmin} = require('./middlewares/adminAuthMiddleware')
+const { requireAuthAcademy, checkAcademy } = require('./middlewares/academyAuthMiddleware')
 
 const app = express()
 app.set('view engine','ejs')
@@ -27,17 +29,16 @@ mongoose.connect(dbURL,{
 
 
 app.use('/',authRoutes)
+app.use('/akademi', requireAuthAcademy, checkAcademy, academyRoutes)
 app.use('/ogretmen',teacherRoutes)
-app.use('/admin', requireAuthAdmin, adminRoutes)
+app.use('/admin', requireAuthAdmin, checkAdmin, adminRoutes)
 
-app.get('/admin/akademikayit', (req,res) => {
-    res.render('academyregister')
-})
 
-app.get('/academy/ogretmenkayit', (req,res) => {
+
+app.get('/akademi/ogretmenkayit', (req,res) => {
     res.render('teacherregister')
 })
 
-app.get('/academy/ogrencikayit', (req,res) => {
+app.get('/akademi/ogrencikayit', (req,res) => {
     res.render('studentregister')
 })

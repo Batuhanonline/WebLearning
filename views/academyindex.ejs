@@ -1,0 +1,20 @@
+<%-include('./inc/site-head')%> 
+
+<%-include('./inc/site-navbar-academy')%> 
+
+<section>
+    <h1>Akademi Anasayfa</h1>
+    <a href="/akademi/ogretmenekle">Öğretmen Ekle</a>
+    <ul>
+        <% teachers.forEach(teacher => { %> 
+            <li>
+                <a href=""><%= teacher.teacherName %> </a>
+                <p>Öğretmen ID :  <%= teacher._id %> </p>
+            </li>
+        <% }) %> 
+    </ul>
+</section>
+
+
+
+<%-include('./inc/site-footer')%> 

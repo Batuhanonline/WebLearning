@@ -1,46 +1,49 @@
 const jwt = require('jsonwebtoken')
-const Admin = require('../models/admin')
+const Academy = require('../models/academy')
 
 
-const requireAuthAdmin = (req, res, next) => {
+const requireAuthAcademy = (req,res,next) => {
     const tokenData = req.cookies.token
 
-    if (tokenData) {
+    if(tokenData) {
         jwt.verify(tokenData,'jwtgizlikelime',(err,decodedToken) => {
             if (err) {
                 console.log(err)
-                res.redirect('/adminlogin')
+                res.redirect('akademigiris')
             }else{
                 console.log(decodedToken)
                 next()
             }
         })
     }else{
-        res.redirect('/adminlogin')
+        res.redirect('/akademigiris')
         next()
     }
 }
 
-const checkAdmin = (req,res,next) => {
+
+const checkAcademy = (req,res,next) => {
     const tokenData = req.cookies.token
 
-    if (tokenData) {
+    if(tokenData) {
         jwt.verify(tokenData,'jwtgizlikelime', async (err,decodedToken) => {
             if (err) {
-                res.locals.admin = null
+                res.locals.academy = null
             }else{
-                let admin = await Admin.findById(decodedToken.id)
-                res.locals.admin = admin
+                let academy = await Academy.findById(decodedToken.id)
+                res.locals.academy = academy
                 next()
             }
         })
     }else{
-        res.locals.admin = null
+        res.locals.academy = null
         next()
     }
+    
 }
 
+
 module.exports = {
-    requireAuthAdmin,
-    checkAdmin
+    requireAuthAcademy,
+    checkAcademy
 }
