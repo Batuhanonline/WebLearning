@@ -20,7 +20,12 @@ const teacherSchema = new Schema({
     academyID: {
         type:String,
         required:true
-    }
+    },
+    lesson:[
+        {
+            lessonID: String
+        }
+    ]
 }, {
     collection: 'teacher',
     timestamps:true

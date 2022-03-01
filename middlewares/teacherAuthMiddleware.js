@@ -1,49 +1,49 @@
 const jwt = require('jsonwebtoken')
-const Academy = require('../models/academy')
+const Teacher = require('../models/teacher')
 
 
-const requireAuthAcademy = (req,res,next) => {
+const requireAuthTeacher = (req,res,next) => {
     const tokenData = req.cookies.token
 
-    if(tokenData) {
+    if (tokenData) {
         jwt.verify(tokenData,'jwtgizlikelime',(err,decodedToken) => {
             if (err) {
                 console.log(err)
-                res.redirect('/akademigiris')
-            }else{
+                res.redirect('/ogretmengiris')
+            } else {
                 console.log(decodedToken)
                 next()
             }
         })
     }else{
-        res.redirect('/akademigiris')
+        res.redirect('/ogretmengiris')
         next()
     }
 }
 
 
-const checkAcademy = (req,res,next) => {
+
+const checkTeacher = (req,res,next) => {
     const tokenData = req.cookies.token
 
-    if(tokenData) {
+    if (tokenData) {
         jwt.verify(tokenData,'jwtgizlikelime', async (err,decodedToken) => {
             if (err) {
-                res.locals.academy = null
-            }else{
-                let academy = await Academy.findById(decodedToken.id)
-                res.locals.academy = academy
+                res.locals.teacher = null
+            } else {
+                let teacher = await Teacher.findById(decodedToken.id)
+                res.locals.teacher = teacher
                 next()
             }
         })
     }else{
-        res.locals.academy = null
+        res.locals.teacher = null
         next()
     }
-    
 }
 
 
 module.exports = {
-    requireAuthAcademy,
-    checkAcademy
+    requireAuthTeacher,
+    checkTeacher
 }

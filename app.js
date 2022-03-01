@@ -10,6 +10,7 @@ const adminRoutes = require('./routes/adminRoutes')
 const academyRoutes = require('./routes/academyRoutes')
 const {requireAuthAdmin, checkAdmin} = require('./middlewares/adminAuthMiddleware')
 const { requireAuthAcademy, checkAcademy } = require('./middlewares/academyAuthMiddleware')
+const { requireAuthTeacher, checkTeacher } = require('./middlewares/teacherAuthMiddleware')
 
 const app = express()
 app.set('view engine','ejs')
@@ -30,7 +31,7 @@ mongoose.connect(dbURL,{
 
 app.use('/',authRoutes)
 app.use('/akademi', requireAuthAcademy, checkAcademy, academyRoutes)
-app.use('/ogretmen',teacherRoutes)
+app.use('/ogretmen',requireAuthTeacher, checkTeacher, teacherRoutes)
 app.use('/admin', requireAuthAdmin, checkAdmin, adminRoutes)
 
 

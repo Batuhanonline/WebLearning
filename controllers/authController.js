@@ -1,6 +1,7 @@
 
 const Admin = require('../models/admin')
 const Academy = require('../models/academy')
+const Teacher = require('../models/teacher')
 const jwt = require('jsonwebtoken')
 
 const maxAge = 60*60*24
@@ -30,7 +31,7 @@ const login_post = async (req, res) => {
     }
 }
 const academy_login_get = (req, res) => {
-    res.render('academylogin',{title: 'Akademi Girişi'})
+    res.render('academylogin',{title: 'Akademi-Giriş'})
 }
 
 
@@ -47,8 +48,22 @@ const academy_login_post = async (req, res) => {
 }
 
 
-const teacher_login_get = (req, res) => {}
-const teacher_login_post = (req, res) => {}
+const teacher_login_get = (req, res) => {
+    res.render('teacherlogin', {title: 'Öğretmen-Giriş'})
+}
+
+const teacher_login_post = async (req, res) => {
+    const { teacherLoginID, teacherPassword } = req.body
+    try {
+        const teacher = await Teacher.login(teacherLoginID, teacherPassword)
+        const token = createToken(teacher._id)
+        res.cookie('token', token, {httpOnly: true, maxAge: maxAge * 1000 })
+        const url = '/ogretmen/'+teacher._id
+        res.redirect(url)
+    } catch (err) {
+        console.log(err)
+    }
+}
 const student_login_get = (req, res) => {}
 const student_login_post = (req, res) => {}
 const logout_get = (req, res) => {}

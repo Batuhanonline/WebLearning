@@ -1,19 +1,19 @@
 <%-include('./inc/site-head')%> 
 
-<%-include('./inc/site-navbar')%> 
+<%-include('./inc/site-navbar-teacher')%> 
 
 
 <section class="hero">
     <div class="conteiner">
         <div class="row    ">
             <div class="col-5 d-grid ">
-                <button class="btn btn-success temp-btn btn-success-outline"href="">Yeni Ders İçeriği</button>
+                <button class="btn btn-success temp-btn btn-success-outline" onclick="window.location.href='/ogretmen/<%= teacher._id %>/yenidersicerigi'">Yeni Ders İçeriği</button>
             </div>
             <div class="col d-grid ">
-                <button class="btn btn-primary btn-primary-outline temp-btn" onclick="window.location.href='/ogretmen/dersicerikleri'">Ders İçerikleri</button>
+                <button class="btn btn-primary btn-primary-outline temp-btn" onclick="window.location.href='/ogretmen/<%= teacher._id %>/dersicerikleri'">Ders İçerikleri</button>
             </div>
             <div class="col d-grid ">
-                <button class="btn btn-primary btn-primary-outline temp-btn" onclick="window.location.href='/ogretmen/dersnotlari'">Ders Notları</button>
+                <button class="btn btn-primary btn-primary-outline temp-btn" onclick="window.location.href='/ogretmen/<%= teacher._id %>/dersnotlari'">Ders Notları</button>
             </div>
         </div>
         <div class="row  ">
@@ -21,10 +21,10 @@
                 <button class="btn btn-success btn-success-outline temp-btn"  href="">Yeni Test İçeriği</button>
             </div>
             <div class="col d-grid">
-                <button class="btn btn-primary btn-primary-outline temp-btn" onclick="window.location.href='/ogretmen/test'">Test İçerikleri</button>
+                <button class="btn btn-primary btn-primary-outline temp-btn" onclick="window.location.href='/ogretmen/<%= teacher._id %>/test'">Test İçerikleri</button>
             </div>
             <div class="col d-grid">
-                <button class="btn btn-primary btn-primary-outline temp-btn" onclick="window.location.href='/ogretmen/arsiv'">Arşiv Notları</button>
+                <button class="btn btn-primary btn-primary-outline temp-btn" onclick="window.location.href='/ogretmen/<%= teacher._id %>/arsiv'">Arşiv Notları</button>
             </div>
         </div>
     </div>

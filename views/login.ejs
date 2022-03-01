@@ -13,10 +13,10 @@
                     <button class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#loginStudent">
                         Öğrenci Giriş
                     </button>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginTeacher">
+                    <button class="btn btn-primary" onclick="teacherLocation()" >
                         Öğretmen Giriş
                     </button>
-                    <button class="btn btn-primary" onclick="academyLocation()" data-bs-toggle="modal" data-bs-target="#loginAcademy">
+                    <button class="btn btn-primary" onclick="academyLocation()" >
                         Akademi Giriş
                     </button>
                 </div>
@@ -28,6 +28,9 @@
 <script>
   function academyLocation() {
       window.location.href="/akademigiris";
+  }
+  function teacherLocation() {
+      window.location.href="/ogretmengiris";
   }
 </script>
 
