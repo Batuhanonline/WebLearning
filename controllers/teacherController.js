@@ -19,7 +19,6 @@ const new_lesson_content = (req,res) => {
     res.render('newlesson', { title: 'Öğretmen-Yeni Ders İçeriği'})
 }
 
-////////////Buradan devam et giren öğretmeni bul, öğretmenin derslerine ekleme yap
 const new_lesson_content_post = (req,res) => {
     const teacherID = req.params.id
     const lesson = req.body

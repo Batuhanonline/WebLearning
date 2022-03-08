@@ -36,5 +36,5 @@ adminSchema.pre('save', async function(next){
     next()
 })
 
-const model = mongoose.model('Student',adminSchema)
+const model = mongoose.model('Admin',adminSchema)
 module.exports = model

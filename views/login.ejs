@@ -10,7 +10,7 @@
             </div>
             <div class="col-3">
                 <div class="btn-group-vertical btn-group-lg">
-                    <button class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#loginStudent">
+                    <button class="btn btn-success"  onclick="studentLocation()">
                         Öğrenci Giriş
                     </button>
                     <button class="btn btn-primary" onclick="teacherLocation()" >
@@ -31,6 +31,9 @@
   }
   function teacherLocation() {
       window.location.href="/ogretmengiris";
+  }
+  function studentLocation() {
+      window.location.href="/ogrencigiris";
   }
 </script>
 

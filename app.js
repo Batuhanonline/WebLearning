@@ -8,9 +8,12 @@ const teacherRoutes = require('./routes/teacherRoutes')
 const authRoutes = require('./routes/authRoutes')
 const adminRoutes = require('./routes/adminRoutes')
 const academyRoutes = require('./routes/academyRoutes')
-const {requireAuthAdmin, checkAdmin} = require('./middlewares/adminAuthMiddleware')
+const studentRoutes = require('./routes/studentRoutes')
+
+const { requireAuthAdmin, checkAdmin } = require('./middlewares/adminAuthMiddleware')
 const { requireAuthAcademy, checkAcademy } = require('./middlewares/academyAuthMiddleware')
 const { requireAuthTeacher, checkTeacher } = require('./middlewares/teacherAuthMiddleware')
+const { requireAuthStudent, checkStudent } = require('./middlewares/studentAuthMiddleware')
 
 const app = express()
 app.set('view engine','ejs')
@@ -32,14 +35,9 @@ mongoose.connect(dbURL,{
 app.use('/',authRoutes)
 app.use('/akademi', requireAuthAcademy, checkAcademy, academyRoutes)
 app.use('/ogretmen',requireAuthTeacher, checkTeacher, teacherRoutes)
+app.use('/ogrenci', requireAuthStudent, checkStudent, studentRoutes)
 app.use('/admin', requireAuthAdmin, checkAdmin, adminRoutes)
 
 
 
-app.get('/akademi/ogretmenkayit', (req,res) => {
-    res.render('teacherregister')
-})
 
-app.get('/akademi/ogrencikayit', (req,res) => {
-    res.render('studentregister')
-})

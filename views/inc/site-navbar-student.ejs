@@ -1,28 +1,26 @@
 <nav class="navbar navbar-dark  navbar-expand" style="background-color: #D95F69;">
     <div class="container" id="navbarText">
-        <a href="/ogretmen/<%= teacher._id %>" class="navbar-brand">PANEL</a>
+        <a href="/ogrenci/<%= student._id %>" class="navbar-brand">PANEL</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="/ogretmen/<%= teacher._id %>/dersicerikleri">Dersler</a>
+                <a class="nav-link " aria-current="page" href="/ogrenci/<%= student._id %>/dersicerikleri">Dersler</a>
               </li><li class="nav-item">
-                <a class="nav-link " aria-current="page" href="/ogretmen/<%= teacher._id %>/test">Testler</a>
-              </li><li class="nav-item">
-                <a class="nav-link " aria-current="page" href="/ogretmen/<%= teacher._id %>/arsiv">Arşiv</a>
+                <a class="nav-link " aria-current="page" href="/ogrenci/<%= student._id %>/test">Testler</a>
               </li>
              
                 
             </ul>
             <ul class="navbar-nav ms-auto">
-                <% if(teacher){ %> 
+                <% if(student){ %> 
                     <span class="navbar-text px-3">
-                        <b> <%= teacher.teacherName %> </b>
+                        <b> <%= student.studentName %> </b>
                     </span>
                     <li>
-                        <a class="btn btn-danger" href="/ogretmen/<%= teacher._id %>/logout">Çıkış Yap</a>
+                        <a class="btn btn-danger" href="/logout">Çıkış Yap</a>
                     </li>
                 <% }else{ %>
                     <a href="/logout">Giriş Yap Yap</a>
