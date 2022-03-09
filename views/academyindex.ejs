@@ -18,7 +18,7 @@
     <ul>
         <% students.forEach(student => { %> 
             <li>
-                <a href=""><%= student.studentName %> </a>
+                <a href="/akademi/ogrencibilgi/<%= student._id %> "><%= student.studentName %> </a>
                 <p>Öğrenci ID :  <%= student._id %> </p>
             </li>
         <% }) %> 

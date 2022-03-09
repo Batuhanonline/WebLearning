@@ -2,7 +2,30 @@
 
 <%-include('./inc/site-navbar-academy')%>
 
+<section>
+    <h1> <%= student.studentName %> </h1>
+    <br>
+    <h1>Atandığı Öğretmenler</h1>
+    <br>
+    <% student.teachers.forEach(teacher => { %>
+        <p> Öğretmen ID: <%= teacher.teacherID %> </p>
+        <form action="" method="post">
+            <button type="submit" name="deleteTeacher" value="<%= teacher.teacherID %>">Sil</button>
+        </form>
+    <% }) %>  
+    <br>
+    <h4>Yeni Öğretmen Ekle</h4>
+    
+    <form action="" method="post">
+        <select name="selectTeacherID" id="selectTeacher">
+            <% teachers.forEach(teacher => { %> 
+                <option value="<%= teacher._id %>"><%= teacher.teacherName %></option>
+            <% }) %>
+        </select>
+        <input type="submit" value="Öğretmeni Ata">
+    </form>
 
+</section>
 
 
 

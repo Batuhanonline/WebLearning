@@ -23,12 +23,14 @@ const academy_index_get = (req,res) => {
 }
 
 const academy_student_info_get = (req, res) => {
-    Student.find().sort({ createdAt: -1 })
+    const studentID = req.params.student
+    console.log(studentID)
+    Student.findById(studentID)
         .then((result) => {
             const student = result
             Teacher.find().sort({ createdAt: -1 })
                 .then((result) => {
-                    res.render('academystudentinfo',{title: 'Akademi-Öğrenci Bilgi', teachers: result, students: student})
+                    res.render('academystudentinfo',{title: 'Akademi-Öğrenci Bilgi', teachers: result, student: student})
                 })
                 .catch((err) => {
                     console.log(err)
@@ -36,6 +38,33 @@ const academy_student_info_get = (req, res) => {
         }).catch((err) => {
             console.log(err)
         })
+}
+
+const academy_student_info_post = (req, res) => {
+    const { selectTeacherID, deleteTeacher} = req.body
+    const studentID = req.params.student
+    
+    
+    if (selectTeacherID) {
+        Student.updateOne({ id: studentID }, {$push: {teachers: {teacherID: selectTeacherID}}})
+        .then((result) => {
+            res.redirect('back')
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    if (deleteTeacher) {
+        Student.updateOne({ id:studentID }, {$pull: {teachers: {teacherID: deleteTeacher}}})
+        .then((result) => {
+            res.redirect('back')
+        })    
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+    
 }
 
 const academy_teacher_add_get = (req,res) => {
@@ -73,5 +102,7 @@ module.exports = {
     academy_teacher_add_get,
     academy_teacher_add_post,
     academy_student_add_get,
-    academy_student_add_post
+    academy_student_add_post,
+    academy_student_info_get,
+    academy_student_info_post
 }
