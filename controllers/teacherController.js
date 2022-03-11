@@ -1,6 +1,8 @@
+const Mongoose = require('mongoose') 
 const Teacher = require('../models/teacher')
 const Lesson = require('../models/lessons')
 const jwt = require('jsonwebtoken')
+
 
 
 const teacher_index = (req,res) => {   
@@ -11,9 +13,31 @@ const teacher_lesson_note = (req,res) => {
     res.render('teacherlessonnotes', {title: 'Öğretmen-Öğretmen Ders Notları'})
 }
 
-const teacher_lesson_contents = (req,res) => {
-    res.render('teacherlessons', {title: 'Öğretmen-Dersler'})
+const teacher_lesson_contents_get = (req,res) => {
+    const teacherID = req.params.id
+    Lesson.find({ lessonTeacher: teacherID }, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('teacherlessons', {title: 'Öğretmen-Dersler', lessons: result})
+        }
+    })  
 }
+
+const teacher_lesson_contents_post = async (req, res) => {
+    const { deleteLessonID }= req.body
+    if (deleteLessonID) {
+        Lesson.findByIdAndDelete(deleteLessonID)
+            .then((result) => {
+                res.redirect('back')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+}
+
+//Ders içeriği bilgi sayfası oluştur Ders içeriği modalını düzenle
 
 const new_lesson_content = (req,res) => {
     res.render('newlesson', { title: 'Öğretmen-Yeni Ders İçeriği'})
@@ -31,7 +55,7 @@ const new_lesson_content_post = (req,res) => {
     addLesson.save()
         .then((result) => {
             const lessonID = result._id
-            Teacher.updateOne({ id: teacherID }, {$push: {lesson: {lessonID: lessonID}}} )
+            Teacher.updateOne({ _id: teacherID }, {$push: {lesson: {lessonID: lessonID}}} )
             .then((result)=>{
                 const url = '/ogretmen/'+teacherID+'/'+lessonID+ '/icerikekle'
                 res.redirect(url)
@@ -54,14 +78,13 @@ const lesson_content_post = (req, res) => {
     const lessonID = req.params.lesson
     const lessonContent = req.body
 
-    Lesson.updateOne({ id: lessonID }, {$push:{lessonContent:{
+    Lesson.updateOne({ _id: lessonID }, {$push:{lessonContent:{
         order: lessonContent.order,
         paragraph: lessonContent.paragraph,
         song: lessonContent.song
     }}})
         .then((result) => {
-            const url = '/ogretmen/'+teacherID+'/'+lessonID+ '/icerikekle'
-            res.redirect(url)
+            res.redirect('back')
             console.log(result)
         })
         .catch((err) => {
@@ -88,7 +111,8 @@ const teacher_logout = (req,res) => {
 module.exports = {
     teacher_index,
     teacher_lesson_note,
-    teacher_lesson_contents,
+    teacher_lesson_contents_get,
+    teacher_lesson_contents_post,
     new_lesson_content,
     new_lesson_content_post,
     teacher_test,

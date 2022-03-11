@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&display=swap');
+
+.hero {
+    background-color: #04B2D9;
+    background-position: center center;
+    background-size: cover;
+    height: 895px;
+}
+
+.hero .conteiner{
+    height:100%;
+}
+
+.login {
+    background-image: url(/img/teacher-bg.jpg);
+    background-position: center center;
+    background-size: cover;
+    height: 961px;
+}
+
+.temp-btn{
+    height: 200px;
+    margin-top: 200px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.btn-success-outline {
+    background-image: linear-gradient(rgba(4, 163, 76, .2),rgba(4, 163, 76, .9));
+    background-size: cover;
+    background-color: transparent;
+    border-color: rgb(4, 163, 76);
+    border-radius: 40px;
+
+  }
+
+  .btn-primary-outline {
+    background-image: linear-gradient(rgba(56, 233, 233, 0.2),rgba(25, 167, 233, 0.9));
+    background-size: cover;
+    background-color: transparent;
+    border-color: rgb(14, 130, 224);
+    border-radius: 40px;
+
+  }
+
+  .lesson-card{
+      margin-left: 20%;
+      margin-top: 7%;
+  }
+  .lesson-card-new{
+    margin-left: 20%;
+    margin-top: 5%;
+    margin-right: 20%;
+    height: 80px;
+  }
+
+  .lesson-card-img {
+      width: 400px;
+      height: 200px;
+  }
+
+  .arsiv-card {
+      width: 80%;
+      margin-left: 10%;
+      margin-top: 7%;
+  }
+
+
+
+
+
+
+
+
+
+

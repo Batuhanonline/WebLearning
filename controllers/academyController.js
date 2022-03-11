@@ -66,7 +66,7 @@ const academy_student_info_post = (req, res) => {
     
     
     if (selectTeacherID) {
-        Student.updateOne({ id: studentID }, {$push: {teachers: {teacherID: selectTeacherID}}})
+        Student.updateOne({ _id: studentID }, {$push: {teachers: {teacherID: selectTeacherID}}})
         .then((result) => {
             res.redirect('back')
         })
@@ -76,7 +76,7 @@ const academy_student_info_post = (req, res) => {
     }
 
     if (deleteTeacher) {
-        Student.updateOne({ id:studentID }, {$pull: {teachers: {teacherID: deleteTeacher}}})
+        Student.updateOne({ _id:studentID }, {$pull: {teachers: {teacherID: deleteTeacher}}})
         .then((result) => {
             res.redirect('back')
         })    

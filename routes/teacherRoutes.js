@@ -7,7 +7,8 @@ router.get('/:id/', teacherController.teacher_index )
 
 router.get('/:id/dersnotlari', teacherController.teacher_lesson_note)
 
-router.get('/:id/dersicerikleri', teacherController.teacher_lesson_contents)
+router.get('/:id/dersicerikleri', teacherController.teacher_lesson_contents_get)
+router.post('/:id/dersicerikleri', teacherController.teacher_lesson_contents_post)
 
 router.get('/:id/yenidersicerigi', teacherController.new_lesson_content)
 router.post('/:id/yenidersicerigi', teacherController.new_lesson_content_post)
