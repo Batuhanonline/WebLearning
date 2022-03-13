@@ -3,14 +3,19 @@ const Teacher = require('../models/teacher')
 const Lesson = require('../models/lessons')
 const jwt = require('jsonwebtoken')
 
+const { marked }= require('marked')
+const slugify = require('slugify')
+const createDomPurifier = require('dompurify')
+const { JSDOM } = require('jsdom')
+const dompurify = createDomPurifier(new JSDOM().window)
 
 
 const teacher_index = (req,res) => {   
-    res.render('teacherindex', {title: 'Öğretmen-Anasayfa'})
+    res.render('teacher/teacherindex', {title: 'Öğretmen-Anasayfa'})
 }
 
 const teacher_lesson_note = (req,res) => {
-    res.render('teacherlessonnotes', {title: 'Öğretmen-Öğretmen Ders Notları'})
+    res.render('teacher/teacherlessonnotes', {title: 'Öğretmen-Öğretmen Ders Notları'})
 }
 
 
@@ -20,7 +25,7 @@ const teacher_lesson_contents_get = (req,res) => {
         if (err) {
             console.log(err)
         } else {
-            res.render('teacherlessons', {title: 'Öğretmen-Dersler', lessons: result, teacherID: teacherID})
+            res.render('teacher/teacherlessons', {title: 'Öğretmen-Dersler', lessons: result, teacherID: teacherID})
         }
     })  
 }
@@ -40,7 +45,7 @@ const teacher_lesson_contents_post = async (req, res) => {
 
 
 const new_lesson_content = (req,res) => {
-    res.render('newlesson', { title: 'Öğretmen-Yeni Ders İçeriği'})
+    res.render('teacher/newlesson', { title: 'Öğretmen-Yeni Ders İçeriği'})
 }
 
 const new_lesson_content_post = (req,res) => {
@@ -77,7 +82,7 @@ const lesson_detail_get = (req, res) => {
             console.log(err)
         } else {
             console.log(result)
-            res.render('lessondetail', {title: 'Ders Detayı', lesson: result, teacherID:teacherID})
+            res.render('teacher/lessondetail', {title: 'Ders Detayı', lesson: result, teacherID:teacherID})
         }
     })
     if(lesson == null) res.redirect('/ogretmen/'+teacherID)
@@ -91,7 +96,7 @@ const lesson_detail_edit_get =  (req, res) => {
             console.log(err)
         } else {
             console.log(result)
-            res.render('lessonedit', {title: 'Ders Düzenleme', lesson: result, teacherID:teacherID})
+            res.render('teacher/lessonedit', {title: 'Ders Düzenleme', lesson: result, teacherID:teacherID})
         }
         if(lesson == null) res.redirect('/ogretmen/'+teacherID)
     })
@@ -102,21 +107,22 @@ const lesson_detail_edit_post = (req ,res) => {
     const teacherID = req.params.teacher
     const lessonID = req.params.lesson
     const lesson = req.body
-    Lesson.findByIdAndUpdate(lessonID, {
+    Lesson.findOneAndUpdate({ _id: lessonID }, {
         lessonTitle: lesson.lessonTitle,
         lessonDescription: lesson.lessonDescription,
-        lessonSubject: lesson.lessonSubject
+        lessonSubject: lesson.lessonSubject,
+        sanitizedHtml:  dompurify.sanitize(marked(lesson.lessonSubject))
     }, (err, result) => {
         if (err) {
             console.log(err)
         } else {
-            res.redirect('/ogretmen/'+teacherID)
+            res.redirect('/ogretmen/'+teacherID+'/'+lessonID+'/ders')
         }
     })
 }
 
 const lesson_content_get = (req, res) => {
-    res.render('contentadd', {title: 'Ders İçeriği'})
+    res.render('teacher/contentadd', {title: 'Ders İçeriği'})
 }
 
 const lesson_content_post = (req, res) => {
@@ -139,11 +145,11 @@ const lesson_content_post = (req, res) => {
 }
 
 const teacher_test = (req,res) => {
-    res.render('teachertest', {title: 'Öğretmen-Testler'})
+    res.render('teacher/teachertest', {title: 'Öğretmen-Testler'})
 }
 
 const teacher_archive = (req,res) => {
-    res.render('teacherarsiv', {title: 'Öğretmen-Arşiv'})
+    res.render('teacher/teacherarsiv', {title: 'Öğretmen-Arşiv'})
 }
 
 const teacher_logout = (req,res) => {

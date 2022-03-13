@@ -4,7 +4,7 @@ const Lesson = require('../models/lessons')
 
 const student_index_get = (req, res) => {
     const studentID = req.params.id
-    res.render('studentindex', {title: 'Öğrenci-Anasayfa', studentID: studentID})
+    res.render('student/studentindex', {title: 'Öğrenci-Anasayfa', studentID: studentID})
 }
 
 const student_lessons_get = (req, res) => {
@@ -19,7 +19,7 @@ const student_lessons_get = (req, res) => {
                 if (err) {
                     console.log(err)
                 } else {
-                    res.render('studentlessons', { title: 'Öğrenci-Dersler', studentID: studentID, teacherID: teacherID, lessons: result })
+                    res.render('student/studentlessons', { title: 'Öğrenci-Dersler', studentID: studentID, teacherID: teacherID, lessons: result })
                 }
             })
         }
@@ -27,7 +27,7 @@ const student_lessons_get = (req, res) => {
 }
 
 const student_draganddroplist_get = (req,res) => {
-    res.render('draganddroplistlesson', {title: 'Sürükle Bırak Liste Kontrolü'})
+    res.render('student/draganddroplistlesson', {title: 'Sürükle Bırak Liste Kontrolü'})
 }
 
 

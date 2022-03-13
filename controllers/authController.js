@@ -11,13 +11,13 @@ const createToken = (id) => {
 }
 
 const index_get = (req,res) => {
-    res.render('login',{title: 'Anasayfa'})
+    res.render('login/login',{title: 'Anasayfa'})
 }
 
 const index_post = async (req,res) => {}
 
 const login_get = (req, res) => {
-    res.render('adminlogin',{title: 'Admin Girişi'})
+    res.render('login/adminlogin',{title: 'Admin Girişi'})
 }
 
 const login_post = async (req, res) => {
@@ -34,7 +34,7 @@ const login_post = async (req, res) => {
 
 
 const academy_login_get = (req, res) => {
-    res.render('academylogin',{title: 'Akademi-Giriş'})
+    res.render('login/academylogin',{title: 'Akademi-Giriş'})
 }
 
 
@@ -52,7 +52,7 @@ const academy_login_post = async (req, res) => {
 
 
 const teacher_login_get = (req, res) => {
-    res.render('teacherlogin', {title: 'Öğretmen-Giriş'})
+    res.render('login/teacherlogin', {title: 'Öğretmen-Giriş'})
 }
 
 const teacher_login_post = async (req, res) => {
@@ -70,7 +70,7 @@ const teacher_login_post = async (req, res) => {
 
 
 const student_login_get = (req, res) => {
-    res.render('studentlogin', {title: 'Öğrenci-Giriş'})
+    res.render('login/studentlogin', {title: 'Öğrenci-Giriş'})
 }
 
 const student_login_post = async (req, res) => {

@@ -56,5 +56,6 @@ lessonSchema.pre('validate', function(next) {
 
 
 
+
 const model = mongoose.model('Lessons', lessonSchema)
 module.exports = model

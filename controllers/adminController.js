@@ -10,7 +10,7 @@ const createToken = (id) => {
 
 
 const admin_register = (req, res) => {
-    res.render('adminregister')
+    res.render('admin/adminregister')
 }
 
 const admin_register_post = (req, res) => {
@@ -25,7 +25,7 @@ const admin_register_post = (req, res) => {
 }
 
 const admin_panel_get = (req, res) => {
-    res.render('adminpanel',{title: 'Admin Paneli'})
+    res.render('admin/adminpanel',{title: 'Admin Paneli'})
 }
 
 const admin_logout_get = (req, res) => {
@@ -35,7 +35,7 @@ const admin_logout_get = (req, res) => {
 
 
 const academy_register_get = (req,res) => {
-    res.render('academyadd',{title: 'Akademi Ekleme'})
+    res.render('admin/academyadd',{title: 'Akademi Ekleme'})
 }
 
 const academy_register_post = (req,res) => {

@@ -10,7 +10,7 @@ const academy_index_get = (req,res) => {
             const student = result
             Teacher.find().sort({ createdAt: -1 })
                 .then((result) => {
-                    res.render('academyindex',{title: 'Akademi-Anasayfa', teachers: result, students: student})
+                    res.render('academy/academyindex',{title: 'Akademi-Anasayfa', teachers: result, students: student})
                 })
                 .catch((err) => {
                     console.log(err)
@@ -25,7 +25,7 @@ const academy_index_get = (req,res) => {
 const academy_teachers_get = (req, res) => {
     Teacher.find().sort({ createdAt: -1 })
         .then((result) => {
-            res.render('academyteachers', { title: 'Akademi-Öğretmenler', teachers:result })
+            res.render('academy/academyteachers', { title: 'Akademi-Öğretmenler', teachers:result })
         })
         .catch((err) => {
             console.log(err)
@@ -35,7 +35,7 @@ const academy_teachers_get = (req, res) => {
 const academy_students_get = (req, res) => {
     Student.find().sort({ createdAt: -1 })
         .then((result) => {
-            res.render('academystudents', { title: 'Akademi-Öğrenciler', students: result })
+            res.render('academy/academystudents', { title: 'Akademi-Öğrenciler', students: result })
         })
         .catch((err) => {
             console.log(err)
@@ -50,7 +50,7 @@ const academy_student_info_get = (req, res) => {
             const student = result
             Teacher.find().sort({ createdAt: -1 })
                 .then((result) => {
-                    res.render('academystudentinfo',{title: 'Akademi-Öğrenci Bilgi', teachers: result, student: student})
+                    res.render('academy/academystudentinfo',{title: 'Akademi-Öğrenci Bilgi', teachers: result, student: student})
                 })
                 .catch((err) => {
                     console.log(err)
@@ -88,7 +88,7 @@ const academy_student_info_post = (req, res) => {
 }
 
 const academy_teacher_add_get = (req,res) => {
-    res.render('teacheradd',{title: 'Akademi-Öğretmen Ekle'})
+    res.render('academy/teacheradd',{title: 'Akademi-Öğretmen Ekle'})
 }
 
 const academy_teacher_add_post = (req,res) => {
@@ -102,7 +102,7 @@ const academy_teacher_add_post = (req,res) => {
 }
 
 const academy_student_add_get = (req, res) => {
-    res.render('studentadd', { title: 'Akademi- Öğrenci Ekle'})
+    res.render('academy/studentadd', { title: 'Akademi- Öğrenci Ekle'})
 }
 
 const academy_student_add_post = (req, res) => {
