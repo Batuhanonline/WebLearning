@@ -1,6 +1,13 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+const { marked }= require('marked')
+const slugify = require('slugify')
+const createDomPurifier = require('dompurify')
+const { JSDOM } = require('jsdom')
+const dompurify = createDomPurifier(new JSDOM().window)
+
+
 const lessonSchema = new Schema({
     lessonTitle: {
         type:String,
@@ -18,23 +25,35 @@ const lessonSchema = new Schema({
         type:Object,
         required:true
     },
-    lessonContent:[
-        {
-            order: {
-                type:String
-            },
-            paragraph: {
-                type:String
-            },
-            song: {
-                type:String
-            }
-        }
-    ]
+    slug: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    sanitizedHtml: {
+        type: String,
+        required: true
+    }
 }, {
     collection: 'lessons',
     timestamps:true
 })
+
+
+lessonSchema.pre('validate', function(next) {
+
+    if (this.lessonTitle) {
+        this.slug = slugify(this.lessonTitle, { lower: true, strict: true })
+    }
+
+    if (this.lessonSubject) {
+        this.sanitizedHtml = dompurify.sanitize(marked(this.lessonSubject))
+    }
+
+    next()
+
+})
+
 
 
 const model = mongoose.model('Lessons', lessonSchema)

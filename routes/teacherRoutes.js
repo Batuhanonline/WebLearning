@@ -16,6 +16,11 @@ router.post('/:id/yenidersicerigi', teacherController.new_lesson_content_post)
 router.get('/:teacher/:lesson/icerikekle', teacherController.lesson_content_get)
 router.post('/:teacher/:lesson/icerikekle', teacherController.lesson_content_post)
 
+router.get ('/:teacher/:lesson/ders', teacherController.lesson_detail_get)
+
+router.get('/:teacher/:lesson/duzenle', teacherController.lesson_detail_edit_get)
+router.post('/:teacher/:lesson/duzenle', teacherController.lesson_detail_edit_post)
+
 router.get('/:id/test', teacherController.teacher_test)
 
 router.get('/:id/arsiv', teacherController.teacher_archive)

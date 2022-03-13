@@ -13,13 +13,14 @@ const teacher_lesson_note = (req,res) => {
     res.render('teacherlessonnotes', {title: 'Öğretmen-Öğretmen Ders Notları'})
 }
 
+
 const teacher_lesson_contents_get = (req,res) => {
     const teacherID = req.params.id
     Lesson.find({ lessonTeacher: teacherID }, (err, result) => {
         if (err) {
             console.log(err)
         } else {
-            res.render('teacherlessons', {title: 'Öğretmen-Dersler', lessons: result})
+            res.render('teacherlessons', {title: 'Öğretmen-Dersler', lessons: result, teacherID: teacherID})
         }
     })  
 }
@@ -37,7 +38,6 @@ const teacher_lesson_contents_post = async (req, res) => {
     }
 }
 
-//Ders içeriği bilgi sayfası oluştur Ders içeriği modalını düzenle
 
 const new_lesson_content = (req,res) => {
     res.render('newlesson', { title: 'Öğretmen-Yeni Ders İçeriği'})
@@ -57,7 +57,7 @@ const new_lesson_content_post = (req,res) => {
             const lessonID = result._id
             Teacher.updateOne({ _id: teacherID }, {$push: {lesson: {lessonID: lessonID}}} )
             .then((result)=>{
-                const url = '/ogretmen/'+teacherID+'/'+lessonID+ '/icerikekle'
+                const url = '/ogretmen/'+teacherID+'/'+lessonID+ '/ders'
                 res.redirect(url)
             })
             .catch((err)=>{
@@ -67,6 +67,52 @@ const new_lesson_content_post = (req,res) => {
         .catch((err) => {
             console.log(err)
         })
+}
+
+const lesson_detail_get = (req, res) => {
+    const teacherID = req.params.teacher
+    const lessonID = req.params.lesson
+    const lesson = Lesson.findById({_id: lessonID}, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(result)
+            res.render('lessondetail', {title: 'Ders Detayı', lesson: result, teacherID:teacherID})
+        }
+    })
+    if(lesson == null) res.redirect('/ogretmen/'+teacherID)
+}
+
+const lesson_detail_edit_get =  (req, res) => {
+    const teacherID = req.params.teacher
+    const lessonID = req.params.lesson
+    const lesson =  Lesson.findById({_id: lessonID}, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(result)
+            res.render('lessonedit', {title: 'Ders Düzenleme', lesson: result, teacherID:teacherID})
+        }
+        if(lesson == null) res.redirect('/ogretmen/'+teacherID)
+    })
+}
+
+
+const lesson_detail_edit_post = (req ,res) => {
+    const teacherID = req.params.teacher
+    const lessonID = req.params.lesson
+    const lesson = req.body
+    Lesson.findByIdAndUpdate(lessonID, {
+        lessonTitle: lesson.lessonTitle,
+        lessonDescription: lesson.lessonDescription,
+        lessonSubject: lesson.lessonSubject
+    }, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.redirect('/ogretmen/'+teacherID)
+        }
+    })
 }
 
 const lesson_content_get = (req, res) => {
@@ -115,9 +161,12 @@ module.exports = {
     teacher_lesson_contents_post,
     new_lesson_content,
     new_lesson_content_post,
+    lesson_detail_edit_get,
+    lesson_detail_edit_post,
     teacher_test,
     teacher_archive,
     lesson_content_get,
     lesson_content_post,
+    lesson_detail_get,
     teacher_logout
 }

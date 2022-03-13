@@ -2,19 +2,19 @@
 <%- include('./inc/site-navbar-teacher.ejs') %> 
 
 <section>
-    <h1>Yeni Ders İçeriği</h1>
+    <h1>Ders İçeriği Düzenleme</h1>
     <form action="" method="post">
         <div class="form-group">
             <label for="lessonTitle">Başlık</label>
-            <input type="text" name="lessonTitle" placeholder="Ders Başlığı" class="form-control" required>
+            <input type="text" name="lessonTitle"  class="form-control" value="<%= lesson.lessonTitle %> " required>
         </div>
         <div class="form-group">
             <label for="lessonDescription">Kısa Açıklama</label>
-            <textarea class="form-control" name="lessonDescription" placeholder="Ders açıklaması" id="lessonDescription" cols="20" rows="10" required></textarea>
+            <textarea class="form-control" name="lessonDescription"  id="lessonDescription" cols="20" rows="10" required><%= lesson.lessonDescription %> </textarea>
         </div>
         <div class="form-group">
             <label for="lessonSubject">Ders İçeriği</label>
-            <textarea name="lessonSubject" id="lessonSubject" placeholder="Ders konusu" class="form-control" cols="30" rows="10"></textarea>
+            <textarea name="lessonSubject" id="lessonSubject" class="form-control" cols="30" rows="10"><%= lesson.lessonSubject %> </textarea>
         </div>
 
         <button class="btn btn-primary" type="submit">Kaydet</button>
