@@ -2,6 +2,7 @@ const Student = require('../models/student')
 const Teacher = require('../models/teacher')
 const Lesson = require('../models/lessons')
 const LessonAfterTest = require('../models/lessonaftertest')
+const LessonAfterVideo = require('../models/lessonaftervideo')
 
 const student_index_get = (req, res) => {
     const studentID = req.params.id
@@ -76,6 +77,44 @@ const student_tests_get = (req, res) => {
     })
 }
 
+const student_videos_get = (req, res) => {
+    const studentID = req.params.id
+
+    Student.findOne({ _id: studentID }, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            const teacherID = result.teachers[0].teacherID
+
+            LessonAfterVideo.find({ teacherID: teacherID }, (err, result) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.render('student/studentvideos', {title: 'Öğrenci-Videolar',
+                    teacherID: teacherID,
+                    studentID: studentID,
+                    videos: result })
+                }
+            })
+        }
+    })
+}
+
+
+const student_videolesson_detail_get = (req, res) => {
+    const studentID = req.params.id
+    const videoLessonID = req.params.videolessonid
+
+    LessonAfterVideo.findOne({ _id: videoLessonID }, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+           res.render('student/studentvideodetail', { title: 'Öğrenci-Video Ders', studentID: studentID, videoLesson: result })
+        }
+    })
+
+}
+
 var questions = [],
     answers = [],
     i = 0
@@ -89,6 +128,8 @@ module.exports = {
     lesson_after_test_detail_get,
     student_tests_get,
     student_lessons_get,
+    student_videos_get,
+    student_videolesson_detail_get,
 
     questions_get(req, res, next){
         const studentID = req.params.id

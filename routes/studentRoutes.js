@@ -16,6 +16,10 @@ router.get('/:id/test', studentController.student_tests_get)
 router.get('/:id/:test/test', studentController.questions_get)
 router.post('/:id/:test/next', studentController.questions_next)
 
+router.get('/:id/video', studentController.student_videos_get)
+
+router.get('/:id/:videolessonid/videodersi', studentController.student_videolesson_detail_get)
+
 
 
 module.exports = router

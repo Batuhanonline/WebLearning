@@ -2,6 +2,7 @@ const Mongoose = require('mongoose')
 const Teacher = require('../models/teacher')
 const Lesson = require('../models/lessons')
 const LessonAfterTest = require('../models/lessonaftertest')
+const LessonAfterVideo = require('../models/lessonaftervideo')
 const jwt = require('jsonwebtoken')
 
 const { marked }= require('marked')
@@ -223,6 +224,62 @@ const teacher_test_add_post = (req, res) => {
     })
 }
 
+
+
+const teacher_videos_get = (req, res) => {
+    const teacherID = req.params.id
+
+    LessonAfterVideo.find({ teacherID: teacherID }, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('teacher/teachervideos', {title: 'Öğretmen-Videolar',
+            teacherID: teacherID,
+            videos: result })
+        }
+    })
+}
+
+const teacher_videos_post = (req, res) => {
+
+    const { deleteLessonID }= req.body
+    if (deleteLessonID) {
+        LessonAfterVideo.findByIdAndDelete(deleteLessonID)
+            .then((result) => {
+                res.redirect('back')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+}
+
+const teacher_videos_add_get = (req, res) => {
+    res.render('teacher/videoadd', { title: 'Video Ekle' })
+}
+
+const teacher_videos_add_post = (req, res) => {
+    const teacherID = req.params.id
+    const data = req.body
+    
+    const addVideo = new LessonAfterVideo({
+        lessonTitle: data.lessonTitle,
+        lessonDescription: data.lessonDescription,
+        lessonVideoURL: data.lessonVideoURL,
+        teacherID: teacherID
+    })
+    addVideo.save()
+        .then((result) => {
+            res.redirect('/ogretmen/'+teacherID+'/video')
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+
+
 const teacher_archive = (req,res) => {
     res.render('teacher/teacherarsiv', {title: 'Öğretmen-Arşiv'})
 }
@@ -254,6 +311,10 @@ module.exports = {
     teacher_newtest_add_post,
     teacher_test_add_get,
     teacher_test_add_post,
+    teacher_videos_get,
+    teacher_videos_post,
+    teacher_videos_add_get,
+    teacher_videos_add_post,
     lesson_detail_get,
     teacher_logout
 }

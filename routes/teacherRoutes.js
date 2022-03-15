@@ -30,6 +30,11 @@ router.post('/:id/yenitest', teacherController.teacher_newtest_add_post)
 router.get('/:id/:testid/soruekle', teacherController.teacher_test_add_get)
 router.post('/:id/:testid/soruekle', teacherController.teacher_test_add_post)
 
+router.get('/:id/video', teacherController.teacher_videos_get)
+router.post('/:id/video', teacherController.teacher_videos_post)
+router.get('/:id/videoekle', teacherController.teacher_videos_add_get)
+router.post('/:id/videoekle', teacherController.teacher_videos_add_post)
+
 router.get('/:id/arsiv', teacherController.teacher_archive)
 
 router.get('/:id/logout', teacherController.teacher_logout)

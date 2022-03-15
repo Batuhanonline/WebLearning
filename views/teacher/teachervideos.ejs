@@ -1,0 +1,78 @@
+<%-include('../inc/site-head')%> 
+
+<%-include('../inc/site-navbar-teacher')%> 
+
+
+
+<section class="hero">
+    <div class="conteiner">
+        <div class="row">
+          <div class="col-8 d-grid gap-2">
+            <a href="/ogretmen/<%= teacherID %>/videoekle" class="btn btn-success lesson-card-new">Yeni Video Ekle</a href="">
+          </div>
+          <div class="col-8">
+            <% videos.forEach(lesson => { %> 
+              <div class="card mb-3 lesson-card" >
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="/img/e-learning-bg.jpg" class="img-fluid rounded-start lesson-card-img" alt="/img/e-learning-bg.jpg">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title"><%= lesson.lessonTitle %> </h5>
+                        <p class="card-text"><%= lesson.lessonDescription %> </p>
+                      </div>
+                      <div class="card-footer text-end">
+                        <div class="row">
+                          <div class="col-3">
+                            <p class="card-text text-start"><small class="text-muted"><%= lesson.createdAt.toLocaleDateString() %> </small></p>
+                          </div>
+                          <div class="col">
+                            <a href="/ogretmen/<%= teacherID %>/<%= lesson.id %>/ders" class="btn btn-info">Detaylı Oku</a>
+                            <button class="btn btn-warning">Arşivle</button>
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<%= lesson._id %>">Sil</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+<!--Delete Check Modal-->
+                <div class="modal fade" id="deleteModal<%= lesson._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Uyarı</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="" method="post">
+                          <div class="form-check">
+                            <input class="form-check-input" name="deleteLessonID" type="checkbox" value="<%= lesson._id %>" id="checkAprove">
+                            <label class="form-check-label" for="checkAprove">
+                              Video dersi silmek istediğinizden emin misin?
+                            </label>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <button type="submit" class="btn btn-danger">Dersi Sil</button>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              <% }) %> 
+          </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<%-include('../inc/site-footer')%> 
