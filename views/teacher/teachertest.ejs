@@ -7,9 +7,10 @@
     <div class="conteiner">
         <div class="row">
           <div class="col-8 d-grid gap-2">
-            <button class="btn btn-success lesson-card-new">Yeni Test Oluştur</button>
+            <a href="./yenitest" class="btn btn-success lesson-card-new">Yeni Test Oluştur</a href="./yenitest">
           </div>
           <div class="col-8">
+            <% tests.forEach(test => { %> 
               <div class="card mb-3 lesson-card" >
                   <div class="row g-0">
                     <div class="col-md-4">
@@ -17,43 +18,54 @@
                     </div>
                     <div class="col-md-8">
                       <div class="card-body">
-                        <h5 class="card-title">Test Başlığı</h5>
-                        <p class="card-text">Öğretmen Notu</p>
+                        <h5 class="card-title"><%= test.testTitle %></h5>
+                        <p class="card-text"><%= test.testDescription %></p>
                       </div>
                       <div class="card-footer text-end">
                         <div class="row">
                           <div class="col-3">
-                            <p class="card-text text-start"><small class="text-muted">Tarih saat</small></p>
+                            <p class="card-text text-start"><small class="text-muted"><%= test.createdAt %></small></p>
                           </div>
                           <div class="col">
-                            <button class="btn btn-info">Arşivle</button>
+                            <button class="btn btn-info">İncele</button>
                             <button class="btn btn-warning">Düzenle</button>
-                            <button class="btn btn-danger">Sil</button>
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<%= test._id %>">Sil</button>
                           </div>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!--Delete Check Modal-->
+                <div class="modal fade" id="deleteModal<%= test._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Uyarı</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="" method="post">
+                          <div class="form-check">
+                            <input class="form-check-input" name="deleteTestID" type="checkbox" value="<%= test._id %>" id="checkAprove">
+                            <label class="form-check-label" for="checkAprove">
+                              Testi silmek istediğinizden emin misin?
+                            </label>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <button type="submit" class="btn btn-danger">Dersi Sil</button>
+                      </form>
                       </div>
                     </div>
                   </div>
                 </div>
+                  <% }) %> 
+                </div>
           </div>
-            <div class="col-8">
-                <div class="card mb-3 lesson-card" >
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="..." class="img-fluid rounded-start" alt="...">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Ders Başlığı</h5>
-                          <p class="card-text">Öğretmen Notu</p>
-                          <p class="card-text"><small class="text-muted">Tarih saat</small></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-            </div>
-        </div>
-    </div>
+           
 </section>
 
 

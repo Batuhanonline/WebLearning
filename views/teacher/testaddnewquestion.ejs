@@ -1,0 +1,45 @@
+<%-include('../inc/site-head')%> 
+
+<%-include('../inc/site-navbar-teacher')%> 
+
+<div class="testForm">
+    <h1>Yeni Soru İçeriği</h1>
+    <form class="form-group" action="" method="post">
+        <div class="questions" id="questions">
+            <div class="form-group">
+                <div class="form-check mb-3">
+                    <label for="question">Yeni Soru</label>
+                    <textarea type="text" name="question" id="question" class="form-control" required cols="2" rows="3"></textarea>
+                </div>
+                <h4>Cevaplar</h4>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" value=1 name="answer" id="answer">
+                    <input type="text" class="form-control"  name="options" id="options">
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" value=2 name="answer" id="answer">
+                    <input type="text" class="form-control"  name="options" id="options">
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" value=3 name="answer" id="answer">
+                    <input type="text" class="form-control"  name="options" id="options">
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" value=4 name="answer" id="answer">
+                    <input type="text" class="form-control"  name="options" id="options">
+                </div>
+                <div class="form-check mb-3">
+                    <button type="submit" class="btn btn-success">Soruyu Kaydet ve Yeni Soru Ekle</button>
+                    <a href="../test" class="btn btn-info">Testi Bitir</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+
+</script>
+
+
+<%-include('../inc/site-footer')%> 

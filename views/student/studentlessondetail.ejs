@@ -1,0 +1,17 @@
+<%-include('../inc/site-head')%> 
+
+<%-include('../inc/site-navbar-student')%> 
+
+<div class="container">
+    <h1 class="mb-1"><%= lesson.lessonTitle %> </h1>
+    <div class="text-muted">
+        <%= lesson.createdAt.toLocaleDateString() %> 
+    </div>
+    <a href="/ogrenci/<%= studentID %>/dersicerikleri" class="btn btn-secondary">Diğer Dersler</a>
+    <div>
+        <%- lesson.sanitizedHtml %> 
+    </div>
+</div>
+
+
+<%-include('../inc/site-footer')%> 

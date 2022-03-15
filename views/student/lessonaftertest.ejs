@@ -1,0 +1,27 @@
+<%-include('../inc/site-head')%> 
+
+<%-include('../inc/site-navbar-student')%> 
+
+
+<% lessonTest.questions.forEach(question => { %>
+    
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          <%= question.question %> 
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><%= question.choices.a %></li>
+          <li class="list-group-item"><%= question.choices.b %></li>
+          <li class="list-group-item"><%= question.choices.c %></li>
+          <li class="list-group-item"><%= question.choices.d %></li>
+        </ul>
+      </div>
+
+
+<% }) %>
+
+
+
+
+
+<%-include('../inc/site-footer')%> 

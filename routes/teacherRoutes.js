@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const teacherController = require('../controllers/teacherController')
+const { route } = require('./studentRoutes')
 
 
 router.get('/:id/', teacherController.teacher_index )
@@ -21,7 +22,13 @@ router.get ('/:teacher/:lesson/ders', teacherController.lesson_detail_get)
 router.get('/:teacher/:lesson/duzenle', teacherController.lesson_detail_edit_get)
 router.post('/:teacher/:lesson/duzenle', teacherController.lesson_detail_edit_post)
 
-router.get('/:id/test', teacherController.teacher_test)
+router.get('/:id/test', teacherController.teacher_test_get)
+router.post('/:id/test', teacherController.teacher_test_post)
+
+router.get('/:id/yenitest', teacherController.teacher_newtest_add_get)
+router.post('/:id/yenitest', teacherController.teacher_newtest_add_post)
+router.get('/:id/:testid/soruekle', teacherController.teacher_test_add_get)
+router.post('/:id/:testid/soruekle', teacherController.teacher_test_add_post)
 
 router.get('/:id/arsiv', teacherController.teacher_archive)
 

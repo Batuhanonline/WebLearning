@@ -1,6 +1,7 @@
 const Mongoose = require('mongoose') 
 const Teacher = require('../models/teacher')
 const Lesson = require('../models/lessons')
+const LessonAfterTest = require('../models/lessonaftertest')
 const jwt = require('jsonwebtoken')
 
 const { marked }= require('marked')
@@ -144,8 +145,82 @@ const lesson_content_post = (req, res) => {
         })
 }
 
-const teacher_test = (req,res) => {
-    res.render('teacher/teachertest', {title: 'Öğretmen-Testler'})
+const teacher_test_get = (req,res) => {
+    
+    const teacherID = req.params.id
+    LessonAfterTest.find({ lessonTeacher: teacherID }, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('teacher/teachertest', {title: 'Öğretmen-Testler',
+            teacherID: teacherID,
+            tests: result })
+        }
+    })
+
+}
+
+const teacher_test_post = (req, res) => {
+
+
+    const { deleteTestID }= req.body
+    if (deleteTestID) {
+        LessonAfterTest.findByIdAndDelete(deleteTestID)
+            .then((result) => {
+                res.redirect('back')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+}
+
+const teacher_newtest_add_get = (req, res) => {
+    const teacherID = req.params.id
+    res.render('teacher/testadd', { title: 'Test Ekle', teacherID: teacherID })
+}
+
+const teacher_newtest_add_post = (req, res) => {
+
+    const teacherID = req.params.id
+    const testTitle = req.body.testTitle
+    const testDescription = req.body.testDescription
+    const addTest = new LessonAfterTest ({
+        testTitle: testTitle,
+        testDescription: testDescription,
+        teacherID: teacherID
+    })
+    addTest.save()
+        .then((result) => {
+            res.redirect('/ogretmen/'+teacherID+'/'+result.id+'/soruekle')
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+const teacher_test_add_get = (req, res) => {
+    const teacherID = req.params.id
+    res.render('teacher/testaddnewquestion', { title: 'Yeni Soru Ekle', teacherID: teacherID })
+}
+
+const teacher_test_add_post = (req, res) => {
+    const teacherID = req.params.id
+    const testID = req.params.testid
+    const data = req.body
+    
+    LessonAfterTest.updateOne({ _id: testID }, {$push: { questions: {
+        question: data.question,
+        options: data.options,
+        answer: data.answer
+    }}})
+    .then((result) => {
+        res.redirect('back')
+        console.log(result)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 }
 
 const teacher_archive = (req,res) => {
@@ -160,6 +235,7 @@ const teacher_logout = (req,res) => {
 
 
 
+
 module.exports = {
     teacher_index,
     teacher_lesson_note,
@@ -169,10 +245,15 @@ module.exports = {
     new_lesson_content_post,
     lesson_detail_edit_get,
     lesson_detail_edit_post,
-    teacher_test,
+    teacher_test_get,
+    teacher_test_post,
     teacher_archive,
     lesson_content_get,
     lesson_content_post,
+    teacher_newtest_add_get,
+    teacher_newtest_add_post,
+    teacher_test_add_get,
+    teacher_test_add_post,
     lesson_detail_get,
     teacher_logout
 }
