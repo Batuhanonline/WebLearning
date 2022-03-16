@@ -1,0 +1,29 @@
+<%-include('../inc/site-head')%> 
+
+<%-include('../inc/site-navbar-teacher')%> 
+
+<div class="gameForm">
+    <h1>Yeni Oyun</h1>
+    <form action="" method="post">
+        <div class="form-group">
+            <label for="gameTitle">Başlık</label>
+            <input type="text" name="gameTitle" id="gameTitle" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="gameDescription">Oyun Açıklaması</label>
+            <textarea type="text" name="gameDescription" id="gameDescription" class="form-control" required cols="3" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <% for( let index = 1; index < 11; index++ ) { %>
+                <label  for="gameContent"><%= index %>. İçerik:</label>
+                <input class="form-control" type="text" name="gameContent">
+            <% } %>
+        </div>
+        <button class="btn btn-success" type="submit">Oyun Dersi Kaydet</button>
+    </form>
+</div>
+
+
+
+
+<%-include('../inc/site-footer')%> 

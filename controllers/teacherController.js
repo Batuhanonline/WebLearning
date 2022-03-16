@@ -3,6 +3,7 @@ const Teacher = require('../models/teacher')
 const Lesson = require('../models/lessons')
 const LessonAfterTest = require('../models/lessonaftertest')
 const LessonAfterVideo = require('../models/lessonaftervideo')
+const LessonAfterGame = require('../models/lessonaftergame')
 const jwt = require('jsonwebtoken')
 
 const { marked }= require('marked')
@@ -279,6 +280,57 @@ const teacher_videos_add_post = (req, res) => {
 }
 
 
+const teacher_games_get = (req, res) => {
+    const teacherID = req.params.id
+
+    LessonAfterGame.find({ teacherID: teacherID }, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('teacher/teachergames', {title: 'Öğretmen-Oyunlar',
+            teacherID: teacherID,
+            games: result })
+        }
+    })
+}
+
+const teacher_games_post = (req, res) => {
+    const { deleteGameID }= req.body
+    if (deleteGameID) {
+        LessonAfterGame.findByIdAndDelete(deleteGameID)
+            .then((result) => {
+                res.redirect('back')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+}
+
+const teacher_newgame_get = (req, res) => {
+    res.render('teacher/gameadd', { title: 'Oyun Ekle' })
+}
+
+const teacher_newgame_post = (req, res) => {
+    const teacherID = req.params.id
+    const data = req.body
+
+    const addGame = new LessonAfterGame({
+        gameTitle: data.gameTitle,
+        gameDescription: data.gameDescription,
+        teacherID: teacherID,
+        gameContent: data.gameContent
+    }) 
+    addGame.save()
+        .then((result) => {
+            console.log(result)
+            res.redirect('/ogretmen/'+teacherID+'/oyunlar')
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
 
 const teacher_archive = (req,res) => {
     res.render('teacher/teacherarsiv', {title: 'Öğretmen-Arşiv'})
@@ -300,6 +352,7 @@ module.exports = {
     teacher_lesson_contents_post,
     new_lesson_content,
     new_lesson_content_post,
+    lesson_detail_get,
     lesson_detail_edit_get,
     lesson_detail_edit_post,
     teacher_test_get,
@@ -315,6 +368,9 @@ module.exports = {
     teacher_videos_post,
     teacher_videos_add_get,
     teacher_videos_add_post,
-    lesson_detail_get,
+    teacher_games_get,
+    teacher_games_post,
+    teacher_newgame_get,
+    teacher_newgame_post,
     teacher_logout
 }

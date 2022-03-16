@@ -18,6 +18,10 @@ router.post('/:id/:test/next', studentController.questions_next)
 
 router.get('/:id/video', studentController.student_videos_get)
 
+router.get('/:id/oyunlar', studentController.student_games_get)
+router.post('/:id/oyunlar', studentController.student_games_post)
+router.get('/:id/:lesson/oyundersi', studentController.student_game_detail_get)
+
 router.get('/:id/:videolessonid/videodersi', studentController.student_videolesson_detail_get)
 
 

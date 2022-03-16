@@ -3,6 +3,7 @@ const Teacher = require('../models/teacher')
 const Lesson = require('../models/lessons')
 const LessonAfterTest = require('../models/lessonaftertest')
 const LessonAfterVideo = require('../models/lessonaftervideo')
+const LessonAfterGame = require('../models/lessonaftergame')
 
 const student_index_get = (req, res) => {
     const studentID = req.params.id
@@ -50,7 +51,51 @@ const lesson_after_test_detail_get = (req, res) => {
     })
 }
 
+const student_games_get = (req, res) => {
+    const studentID = req.params.id
+
+    Student.findOne({ _id: studentID }, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            const teacherID = result.teachers[0].teacherID
+
+            LessonAfterGame.find({ teacherID: teacherID }, (err, result) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.render('student/studentgames', { title: 'Öğrenci-Oyunlar', games: result })
+                }
+            })
+        }        
+    })
+
+}
+
+const student_games_post = (req, res) => {
+    
+}
+
+const student_game_detail_get = (req, res) => {
+    const studentID = req.params.id
+    const gameID = req.params.lesson
+
+    LessonAfterGame.findOne({ _id: gameID }, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('student/studentgamedetail', { title: 'Oyunlaştırılmış Pekiştirme', 
+            game: result,
+            studentID: studentID })
+        }
+    })
+}
+
 const student_draganddroplist_get = (req,res) => {
+
+
+
+
     res.render('student/draganddroplistlesson', {title: 'Sürükle Bırak Liste Kontrolü'})
 }
 
@@ -130,6 +175,9 @@ module.exports = {
     student_lessons_get,
     student_videos_get,
     student_videolesson_detail_get,
+    student_games_get,
+    student_games_post,
+    student_game_detail_get,
 
     questions_get(req, res, next){
         const studentID = req.params.id

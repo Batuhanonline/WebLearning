@@ -35,6 +35,11 @@ router.post('/:id/video', teacherController.teacher_videos_post)
 router.get('/:id/videoekle', teacherController.teacher_videos_add_get)
 router.post('/:id/videoekle', teacherController.teacher_videos_add_post)
 
+router.get('/:id/oyunlar', teacherController.teacher_games_get)
+router.post('/:id/oyunlar', teacherController.teacher_games_post)
+router.get('/:id/oyunekle', teacherController.teacher_newgame_get)
+router.post('/:id/oyunekle', teacherController.teacher_newgame_post)
+
 router.get('/:id/arsiv', teacherController.teacher_archive)
 
 router.get('/:id/logout', teacherController.teacher_logout)

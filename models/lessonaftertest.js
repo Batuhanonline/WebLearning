@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { schema } = require('./teacher')
 const Schema = mongoose.Schema
 
 

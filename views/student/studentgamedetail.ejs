@@ -1,7 +1,9 @@
 <%-include('../inc/site-head-draganddroplist')%> 
+<%-include('../inc/site-navbar-student')%> 
 
-<h1>Ders Başlığı</h1>
-<p>Ders açıklaması Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quaerat est, distinctio quas sunt tenetur ipsum hic fugit quisquam consequatur incidunt adipisci vel vitae cumque soluta assumenda ex recusandae quod!</p>
+<section>
+<h1><%= game.gameTitle %> </h1>
+<p><%= game.gameDescription %> </p>
 
 <ul class="draggable-list" id="draggable-list"></ul>
 <button class="check-btn" id="check">
@@ -9,25 +11,24 @@
     <i class="fas fa-paper-plane"></i>
 </button>
 
-
+</section>
 
 
 <script>
     const draggable_list = document.getElementById('draggable-list')
 const check = document.getElementById('check')
 
-const lessonContents = [
-    'Bir',
-    'İki',
-    'Üç',
-    'Dört',
-    'Beş',
-    'Altı',
-    'Yedi',
-    'Sekiz',
-    'Dokuz',
-    'On'
-]
+const lessonContents = ['<%= game.gameContent[0] %>',
+'<%= game.gameContent[1] %>',
+'<%= game.gameContent[2] %>',    
+'<%= game.gameContent[3] %>',
+'<%= game.gameContent[4] %>',
+'<%= game.gameContent[5] %>',
+'<%= game.gameContent[6] %>',
+'<%= game.gameContent[7] %>',
+'<%= game.gameContent[8] %>',
+'<%= game.gameContent[9] %>']
+
 
 //Store list items
 const listItems = []
