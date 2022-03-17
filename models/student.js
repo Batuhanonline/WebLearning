@@ -31,10 +31,16 @@ const studentSchema = new Schema({
     examGrades: [
         {
             lessonID: {
-                type: String
+                type: String,
+                required: true
             },
-            grade: {
-                type: String
+            answerTrue: {
+                type: String,
+                required: true
+            },
+            answerFalse: {
+                type: String,
+                required: true
             }
         }
     ]

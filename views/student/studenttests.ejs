@@ -24,7 +24,14 @@
                             <p class="card-text text-start"><small class="text-muted"><%= test.createdAt %> </small></p>
                           </div>
                           <div class="col">
-                            <a href="/ogrenci/<%= studentID %>/<%= test._id %>/test" class="btn btn-success">Devamını Oku</a>
+                            <% student.examGrades.forEach(lesson => { %>
+                              <% if (lesson.lessonID == test._id) { %>
+                                <p>Doğru Sayısı: <%= lesson.answerTrue %></p>
+                                <p>Yanlış Sayısı: <%= lesson.answerFalse %></p> 
+                              <% } else { %>
+                                <a href="/ogrenci/<%= student._id %>/<%= test._id %>/test" class="btn btn-success">Devamını Oku</a>
+                              <% } %>
+                            <% }) %>
                           </div>
                         </div>
                       </div>
