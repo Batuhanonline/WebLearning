@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/netlify-lambda serve src ",
-    "build": "./node_modules/.bin/netlify-lambda build src "
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,8 +22,6 @@
     "marked": "^4.0.12",
     "mongoose": "^6.2.0",
     "morgan": "^1.10.0",
-    "netlify-lambda": "^2.0.15",
-    "serverless-http": "^2.7.0",
     "slugify": "^1.6.5"
   }
 }
