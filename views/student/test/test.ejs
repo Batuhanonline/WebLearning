@@ -8,23 +8,16 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 quizForm">
-            <h2><%= test.testTitle %> </h2>
-            <h5><%= test.testDescription %></h5>
-            <form method="post" action="">
-                    <div class="form-control">
-                        <% test.questions.forEach((question, a) => { %>
-                            <div class="form-control mb-3">
-                        <label><%= question.question %></label>
-                        <div class="radio">
-                            <% question.options.forEach(function(option,index){ %>
-                            <label class="radio form-control">
-                             <input required  type="radio" name="answer<%= a %>" value=<%= index + 1 %>><%= option %></label>
-                            <% })%>
-                        </div>
+            <form method="post" action="./next">
+                <div class="form-control">
+                    <label><%= question %></label>
+                    <div class="radio">
+                        <% options.forEach(function(option,index){ %>
+                        <label class="radio">
+                         <input required  type="radio" name="optradio" value=<%= index + 1 %>><%= option %></label>
+                        <% })%>
                     </div>
-                <% }) %>
-                
-                    <button type="submit" class="btn btn-success">Gönder</button>
+                    <input type="submit" class="btn btn-success" value="Next">
                 </div>
             </form>
         </div>

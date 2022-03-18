@@ -107,13 +107,13 @@ const student_tests_get = (req, res) => {
             console.log(err)
         } else {
             const teacherID = result.teachers[0].teacherID
-            const student = result
+
             LessonAfterTest.find({ lessonTeacher: teacherID }, (err, result) => {
                 if (err) {
                     console.log(err)
                 } else {
                     res.render('student/studenttests', { title: 'Öğrenci-Testler', 
-                    student: student, 
+                    studentID: studentID, 
                     teacherID: teacherID, 
                     tests: result })
                 }
@@ -160,57 +160,10 @@ const student_videolesson_detail_get = (req, res) => {
 
 }
 
-const questions_get = (req, res, next) => {
-    const studentID = req.params.id
-    const testID = req.params.test
+var questions = [],
+    answers = [],
+    i = 0
 
-    LessonAfterTest.findById({ _id: testID }, (err, result) => {
-        if (err) {
-            console.log(err)
-        } else {
-            const test = result
-            res.render('student/test/test', { title: 'Öğrenci-Test',
-            test: test,
-            studentID: studentID })
-        }
-    } )
-}
-
-const questions_post = (req, res) => {
-    const studentID = req.params.id
-    const testID = req.params.test
-    const data = req.body
-    const answers = [data.answer0,data.answer1,data.answer2,data.answer3,data.answer4,data.answer5,
-        data.answer6,data.answer7,data.answer8,data.answer9]
-    LessonAfterTest.findById({ _id: testID }, (err, result) => {
-        if (err) {
-            console.log(err)
-        } else {
-            const test = result
-            var answerTrue = 0
-            var answerFalse = 0
-            test.questions.forEach((question, index) => {
-                if (question.answer == answers[index]) {
-                    answerTrue++
-                } else {
-                    answerFalse++
-                }
-            })
-            Student.updateOne({ _id: studentID }, { $push: { examGrades: {
-                lessonID: testID,
-                answerTrue: answerTrue,
-                answerFalse: answerFalse
-            } } })
-                .then((result) => {
-                    res.redirect('/ogrenci/'+studentID+'/test')
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-        }
-    } )
-
-}
 
 
 module.exports = {
@@ -225,8 +178,58 @@ module.exports = {
     student_games_get,
     student_games_post,
     student_game_detail_get,
-    questions_get,
-    questions_post
+
+    questions_get(req, res, next){
+        const studentID = req.params.id
+        const testID = req.params.test
+    
+        LessonAfterTest.findById({ _id: testID }, (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                questions = result.questions
+                answer = []
+                res.render('student/test/test', { title: 'Öğrenci-Test',
+                question: questions[0].question,
+                options: questions[0].options,
+                studentID: studentID })
+            }
+        } )
+    },
+
+
+    questions_next(req, res, next){
+        console.log("question: ", questions)
+        i = i + 1;
+            if(req.body.optradio){
+                if(i <= questions.length) {
+                    answers.push(req.body.optradio)
+                }
+                 if(i < questions.length){
+                res.render('student/test/test',
+                {   title: 'Öğrenci-Test',
+                    question:questions[i].question,
+                    options:questions[i].options});
+                 } else {
+                     i=0;
+                     var score = 0;
+                     for(let j = 0 ; j < questions.length; j++) {
+                          if(questions[j].answer == answers[j])
+                          {
+                              score = score + 1;
+                              console.log('skor:'+score)
+                          }
+                     } 
+                     res.render('student/test/score',{
+                        title: 'Test Skor',
+                        score: score,
+                        total: questions.length})
+                        answers = []
+                 }
+            } 
+    },
+
+
 
 }
 

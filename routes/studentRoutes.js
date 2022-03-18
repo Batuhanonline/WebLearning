@@ -14,7 +14,7 @@ router.get('/:id/suruklebirakliste', studentController.student_draganddroplist_g
 router.get('/:id/test', studentController.student_tests_get)
 
 router.get('/:id/:test/test', studentController.questions_get)
-router.post('/:id/:test/test', studentController.questions_post)
+router.post('/:id/:test/next', studentController.questions_next)
 
 router.get('/:id/video', studentController.student_videos_get)
 
