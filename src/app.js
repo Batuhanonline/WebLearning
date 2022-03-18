@@ -3,17 +3,18 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 
+const serverless = require('serverless-http')
 
-const teacherRoutes = require('./routes/teacherRoutes')
-const authRoutes = require('./routes/authRoutes')
-const adminRoutes = require('./routes/adminRoutes')
-const academyRoutes = require('./routes/academyRoutes')
-const studentRoutes = require('./routes/studentRoutes')
+const teacherRoutes = require('../routes/teacherRoutes')
+const authRoutes = require('../routes/authRoutes')
+const adminRoutes = require('../routes/adminRoutes')
+const academyRoutes = require('../routes/academyRoutes')
+const studentRoutes = require('../routes/studentRoutes')
 
-const { requireAuthAdmin, checkAdmin } = require('./middlewares/adminAuthMiddleware')
-const { requireAuthAcademy, checkAcademy } = require('./middlewares/academyAuthMiddleware')
-const { requireAuthTeacher, checkTeacher } = require('./middlewares/teacherAuthMiddleware')
-const { requireAuthStudent, checkStudent } = require('./middlewares/studentAuthMiddleware')
+const { requireAuthAdmin, checkAdmin } = require('../middlewares/adminAuthMiddleware')
+const { requireAuthAcademy, checkAcademy } = require('../middlewares/academyAuthMiddleware')
+const { requireAuthTeacher, checkTeacher } = require('../middlewares/teacherAuthMiddleware')
+const { requireAuthStudent, checkStudent } = require('../middlewares/studentAuthMiddleware')
 
 const app = express()
 app.set('view engine','ejs')
@@ -39,5 +40,7 @@ app.use('/ogrenci', requireAuthStudent, checkStudent, studentRoutes)
 app.use('/admin', requireAuthAdmin, checkAdmin, adminRoutes)
 
 
+module.exports.handler = serverless(app)
+//node server.js
 
 
