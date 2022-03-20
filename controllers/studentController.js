@@ -7,7 +7,54 @@ const LessonAfterGame = require('../models/lessonaftergame')
 
 const student_index_get = (req, res) => {
     const studentID = req.params.id
-    res.render('student/studentindex', {title: 'Öğrenci-Anasayfa', studentID: studentID})
+
+    Student.findOne({ _id: studentID }, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            const teacherID = result.teachers[0].teacherID
+
+            Lesson.find({ lessonTeacher: teacherID }, (err, result) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    const lessons = result  
+                    
+                    LessonAfterGame.find({ teacherID: teacherID }, (err, result) => {
+                        if (err) {
+                            console.log(err)
+                        } else {
+                            const games = result
+                            
+                            LessonAfterTest.find({ lessonTeacher: teacherID }, (err, result) => {
+                                if (err) {
+                                    console.log(err)
+                                } else {
+                                    const tests = result
+
+                                    LessonAfterVideo.find({ teacherID: teacherID }, (err, result) => {
+                                        if (err) {
+                                            console.log(err)
+                                        } else {
+                                            const videos = result
+
+                                            res.render('student/studentindex', {title: 'Öğrenci-Anasayfa', 
+                                                studentID: studentID, 
+                                                lessons: lessons,
+                                                games: games,
+                                                videos: videos,
+                                                tests: tests    })
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+
+        }
+    })   
 }
 
 const student_lessons_get = (req, res) => {

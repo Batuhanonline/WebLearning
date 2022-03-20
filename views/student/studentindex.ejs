@@ -2,9 +2,67 @@
 
 <%-include('../inc/site-navbar-student')%> 
 
-
-<h1>Student Page</h1>
-<a href="/ogrenci/<%= studentID %>/test">test</a>
-<a href="/ogrenci/<%= studentID %>/suruklebirakliste">Liste</a>
+<section class="hero">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <% lessons.forEach(lesson => { %>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="/img/lesson_img.jpg" alt="" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= lesson.lessonTitle %>  </h5>
+                            <p class="card-text"><%= lesson.lessonDescription %> </p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted"><%= lesson.createdAt.toLocaleDateString() %> </small>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+            <% tests.forEach(test => { %>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="/img/test_img.jpg" alt="" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= test.testTitle %>  </h5>
+                            <p class="card-text"><%= test.testDescription %> </p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted"><%= test.createdAt.toLocaleDateString() %> </small>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+            <% videos.forEach(lesson => { %>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="/img/video_img.jpg" alt="" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= lesson.lessonTitle %>  </h5>
+                            <p class="card-text"><%= lesson.lessonDescription %> </p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted"><%= lesson.createdAt.toLocaleDateString() %> </small>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+            <% games.forEach(game => { %>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="/img/e-learning-bg.jpg" alt="" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= game.gameTitle %>  </h5>
+                            <p class="card-text"><%= game.gameDescription %> </p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted"><%= game.createdAt.toLocaleDateString() %> </small>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
 
 <%-include('../inc/site-footer')%> 
