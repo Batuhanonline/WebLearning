@@ -3,6 +3,8 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 
+const { MongoClient, ServerApiVersion } = require('mongodb')
+
 
 const teacherRoutes = require('./routes/teacherRoutes')
 const authRoutes = require('./routes/authRoutes')
@@ -24,7 +26,7 @@ app.use(morgan('tiny'))
 app.use(cookieParser())
 
 
-const dbURL = 'mongodb://localhost/weblearningplatform'
+const dbURL = 'mongodb+srv://Batuhann:u8Irgkuq4XTJ6PuP@cluster0.xyidp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 mongoose.connect(dbURL,{
     useNewUrlParser: true,
     useUnifiedTopology: true
