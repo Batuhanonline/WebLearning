@@ -5,9 +5,11 @@
 <h1><%= game.gameTitle %> </h1>
 <p><%= game.gameDescription %> </p>
 
+<p id="stopwatch" style="font-size: 40px; color: rgb(187, 9, 45);">0 : 0</p>
+
 <ul class="draggable-list" id="draggable-list"></ul>
 <button class="check-btn" id="check">
-    Kontrol Et
+    Gönder
     <i class="fas fa-paper-plane"></i>
 </button>
 
@@ -15,7 +17,23 @@
 
 
 <script>
-    const draggable_list = document.getElementById('draggable-list')
+
+
+var second = 0
+var minute = 0
+var sec = 0
+function stopwatch() {
+    var min = Math.floor(second/60)
+    var hour = Math.floor(second/3600)
+    minute = min%60
+    sec = second%60
+    document.getElementById("stopwatch").innerHTML = minute+" : "+sec
+    second++
+}
+
+setInterval("stopwatch()", 1000)
+
+const draggable_list = document.getElementById('draggable-list')
 const check = document.getElementById('check')
 
 const lessonContents = ['<%= game.gameContent[0] %>',
@@ -98,20 +116,52 @@ function swapItems(formIndex, toIndex) {
     listItems[formIndex].appendChild(itemTwo)
 }
 
+var checkControl = 0
 // Check the order of list items 
-function checkOrder(params) {
-    listItems.forEach((listItem, index) => {
+async function checkOrder(params) {
+    var rightItems = 0
+    var wrongItems = 0
+    checkControl++
+    await listItems.forEach((listItem, index) => {
         const contentName = listItem.querySelector('.draggable')
         .innerText.trim()
 
         if(contentName !== lessonContents[index]) {
             listItem.classList.add('wrong')
+            wrongItems++
         } else {
             listItem.classList.remove('wrong')
             listItem.classList.add('right')
+            rightItems++
         }
+        
     })
+    const data = {
+            right: rightItems,
+            wrong: wrongItems,
+            check: checkControl,
+            min: minute,
+            sec: sec
+            
+        }
+        
+    await fetch(window.location.href,{
+        method: 'POST',
+        headers: {
+            'Accept': "application/json",
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => console.log(response))
+    .catch(err => console.log(err))
+    console.log("fetch ok")
+    if (rightItems == 10) {
+        window.location.href = "./oyunskoru"
+    }
+
 }
+    
 
 function addEventListeners() {
     const draggables = document.querySelectorAll('.draggable')

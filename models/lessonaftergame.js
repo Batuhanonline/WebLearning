@@ -19,6 +19,26 @@ const lessonAfterGameSchema = new Schema({
         {
             type: String
         }
+    ],
+    scores: [
+        {
+            studentID: {
+                type: String,
+                required: true
+            },
+            check: {
+                type: Number,
+                required: true
+            },
+            minute: {
+                type: Number,
+                required: true
+            },
+            second: {
+                type: Number,
+                required: true
+            },
+        }
     ]
 }, {
     collection: 'lessonAfterGame',

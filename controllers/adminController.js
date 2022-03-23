@@ -10,7 +10,7 @@ const createToken = (id) => {
 
 
 const admin_register = (req, res) => {
-    res.render('admin/adminregister')
+    res.render('admin/adminregister',{title: 'Admin Paneli'})
 }
 
 const admin_register_post = (req, res) => {

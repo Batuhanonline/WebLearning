@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
+var bodyParser = require('body-parser')
 
 
 const teacherRoutes = require('./routes/teacherRoutes')
@@ -22,6 +23,7 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended:true }))
 app.use(morgan('tiny'))
 app.use(cookieParser())
+app.use(bodyParser.json())
 
 
 const dbURL = 'mongodb://localhost/weblearningplatform'

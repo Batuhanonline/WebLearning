@@ -5,6 +5,8 @@ const LessonAfterTest = require('../models/lessonaftertest')
 const LessonAfterVideo = require('../models/lessonaftervideo')
 const LessonAfterGame = require('../models/lessonaftergame')
 
+
+
 const student_index_get = (req, res) => {
     const studentID = req.params.id
 
@@ -133,18 +135,51 @@ const student_game_detail_get = (req, res) => {
         } else {
             res.render('student/studentgamedetail', { title: 'Oyunlaştırılmış Pekiştirme', 
             game: result,
-            studentID: studentID })
+            studentID: studentID,
+            lessonID: gameID })
         }
     })
 }
 
-const student_draganddroplist_get = (req,res) => {
+const student_game_detail_post = (req,res) => {
+    const studentID = req.params.id
+    const lessonID = req.params.lesson
+    const response = req.body
+    console.log(response)
+    
 
-
-
-
-    res.render('student/draganddroplistlesson', {title: 'Sürükle Bırak Liste Kontrolü'})
+    if (response.right == 10) {            
+        LessonAfterGame.updateOne({ _id: lessonID }, {$addToSet: {scores: {
+            studentID: studentID,
+            check: response.check,
+            minute: response.min,
+            second: response.sec
+        }}})
+        .then(result => {
+            res.redirect('/ogrenci/'+studentID+'/'+lessonID+'/oyunskoru')
+            console.log(result)
+        })
+        .catch(err => console.log(err))
+    } else {
+        res.send(response)
+    }
 }
+
+const student_gamescore_detail_get = (req, res) => {
+    const studentID = req.params.id
+    const lessonID = req.params.lesson
+
+    LessonAfterGame.find({ _id: lessonID }, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(result)
+            res.render('student/gamescore', { title: 'Oyun Skoru', gameLesson: result })
+        }
+    } )
+
+}
+
 
 const student_tests_get = (req, res) => {
     const studentID = req.params.id
@@ -262,7 +297,7 @@ const questions_post = (req, res) => {
 
 module.exports = {
     student_index_get,
-    student_draganddroplist_get,
+    student_game_detail_post,
     student_lesson_detail_get,
     lesson_after_test_detail_get,
     student_tests_get,
@@ -272,6 +307,7 @@ module.exports = {
     student_games_get,
     student_games_post,
     student_game_detail_get,
+    student_gamescore_detail_get,
     questions_get,
     questions_post
 
