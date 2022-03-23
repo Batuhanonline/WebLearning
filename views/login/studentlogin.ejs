@@ -1,12 +1,32 @@
 <%-include('../inc/site-head')%> 
 
 <section>
-    <form action="" method="post">
-        <input type="text" name="studentLoginID" placeholder="ID" required>
-        <input type="password" name="studentPassword" placeholder="Şİfre" required>
-        <input type="submit" value="Giriş Yap">
-    </form>
+    <div class="d-flex justify-content-center" style="margin-top: 100px;">
+        <div class="card" style="width: 35%;">
+            <div class="card-header">
+                <h1>Öğrenci Giriş</h1>
+            </div>
+            <div class="card-body">
+                <form action="" method="post">
+                    <div class="mb-3">
+                        <label for="studentLoginID" class="form-label">ID Numaranız</label>
+                        <input class="form-control" id="studentLoginID" type="text" name="studentLoginID" placeholder="ID" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentPassword" class="form-label">Şifreniz</label>
+                        <input class="form-control" type="password" id="studentPassword" name="studentPassword" placeholder="Şİfre" required>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Giriş Yap">
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 
 
 <%-include('../inc/site-footer.ejs')%> 
+
+
+
+        
+        
