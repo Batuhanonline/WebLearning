@@ -23,8 +23,7 @@ const studentSchema = new Schema({
     teachers:[
         {
             teacherID:{
-                type: String,
-                unique: true
+                type: String
             }
         }
     ],

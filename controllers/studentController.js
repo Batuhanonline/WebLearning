@@ -258,7 +258,7 @@ const questions_get = (req, res, next) => {
     } )
 }
 
-const questions_post = (req, res) => {
+const questions_post = async (req, res) => {
     const studentID = req.params.id
     const testID = req.params.test
     const data = req.body
