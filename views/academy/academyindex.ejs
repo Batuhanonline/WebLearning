@@ -3,26 +3,31 @@
 <%-include('../inc/site-navbar-academy')%> 
 
 <section>
-    <h1>Akademi Anasayfa</h1>
-    <a href="/akademi/ogretmenekle">Öğretmen Ekle</a>
-    <ul>
-        <% teachers.forEach(teacher => { %> 
-            <li>
-                <a href=""><%= teacher.teacherName %> </a>
-                <p>Öğretmen ID :  <%= teacher._id %> </p>
-            </li>
-        <% }) %> 
-    </ul>
 
-    <a href="/akademi/ogrenciekle">Öğrenci Ekle</a>
-    <ul>
-        <% students.forEach(student => { %> 
-            <li>
-                <a href="/akademi/ogrencibilgi/<%= student._id %> "><%= student.studentName %> </a>
-                <p>Öğrenci ID :  <%= student._id %> </p>
-            </li>
-        <% }) %> 
-    </ul>
+
+    <div class="d-flex justify-content-center" style="margin-top: 50px;">
+        <ul class="list-group " style="width: 40%;">
+            <a class="list-group-item list-group-item-action list-group-item-danger" href="/akademi/ogretmenekle">Öğretmen Ekle</a>
+            <% teachers.forEach(teacher => { %> 
+                <a href="#" class="list-group-item list-group-item-action list-group-item-success"><%= teacher.teacherName %> </a>
+                <li class="list-group-item list-group-item-">Öğretmen ID :  <%= teacher._id %> </li>
+                <li class="list-group-item list-group-item-">Kayıt Tarihi :  <%= teacher.createdAt.toLocaleDateString() %> </li>
+            <% }) %> 
+        </ul>
+    </div>
+
+
+    <div class="d-flex justify-content-center" style="margin-top: 50px;">
+        <ul class="list-group" style="width: 40%;">
+            <a class="list-group-item list-group-item-action list-group-item-danger" href="/akademi/ogrenciekle">Öğrenci Ekle</a>
+            <% students.forEach(student => { %> 
+                <a class="list-group-item list-group-item-action list-group-item-success" href="/akademi/ogrencibilgi/<%= student._id %> "><%= student.studentName %> </a>
+                <li class="list-group-item list-group-item-">Öğrenci ID :  <%= student._id %> </li>
+                <li class="list-group-item list-group-item-">Kayıt Tarihi :  <%= student.createdAt.toLocaleDateString() %> </li>
+            <% }) %> 
+        </ul>
+    </div>
+    
 </section>
 
 

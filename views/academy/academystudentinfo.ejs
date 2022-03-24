@@ -3,27 +3,41 @@
 <%-include('../inc/site-navbar-academy')%>
 
 <section>
-    <h1> <%= student.studentName %> </h1>
-    <br>
-    <h1>Atandığı Öğretmenler</h1>
-    <br>
-    <% student.teachers.forEach(teacher => { %>
-        <p> Öğretmen ID: <%= teacher.teacherID %> </p>
-        <form action="" method="post">
-            <button type="submit" name="deleteTeacher" value="<%= teacher.teacherID %>">Sil</button>
-        </form>
-    <% }) %>  
-    <br>
-    <h4>Yeni Öğretmen Ekle</h4>
-    
-    <form action="" method="post">
-        <select name="selectTeacherID" id="selectTeacher">
-            <% teachers.forEach(teacher => { %> 
-                <option value="<%= teacher._id %>"><%= teacher.teacherName %></option>
-            <% }) %>
-        </select>
-        <input type="submit" value="Öğretmeni Ata">
-    </form>
+
+    <div class="d-flex justify-content-center" style="margin-top: 80px;">
+        <div class="card" style="width: 40%;">
+            <div class="card-header">
+                <h1> <%= student.studentName %> </h1>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success"><h5>Atandığı Öğretmenler</h5></li>
+                    <% student.teachers.forEach(teacher => { %>
+                        <li class="list-group-item d-flex justify-content-between">Öğretmen ID: <%= teacher.teacherID %>
+                            <form action="" method="post">
+                                <button class="btn btn-danger" type="submit" name="deleteTeacher" value="<%= teacher.teacherID %>">Sil</button>
+                            </form>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success"><h5>Yeni Öğretmen Ekle</h5></li>
+                </ul>
+                <form action="" method="post">
+                    <select class="form-select" name="selectTeacherID" id="selectTeacher" style="margin-top: 10px;">
+                        <option value="">Öğretmen Seç</option>
+                        <% teachers.forEach(teacher => { %> 
+                            <option value="<%= teacher._id %>"><%= teacher.teacherName %></option>
+                        <% }) %>
+                    </select>
+                    <button class="btn btn-success" style="margin-top: 10px;" type="submit">Öğretmeni Ata</button>
+                    <!-- <input class="btn btn-success" type="submit" value="Öğretmeni Ata" style="margin-top: 10px;"> -->
+                </form>
+            </div>
+        </div>
+    </div>
 
 </section>
 

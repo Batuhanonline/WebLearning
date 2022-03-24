@@ -4,16 +4,16 @@
 
 <section>
 
-<h3>Öğrenciler</h3>
-<a href="/akademi/ogrenciekle">Öğrenci Ekle</a>
-<ul>
-    <% students.forEach(student => { %> 
-        <li>
-            <a href="/akademi/ogrencibilgi/<%= student._id %> "><%= student.studentName %> </a>
-            <p>Öğrenci ID :  <%= student._id %> </p>
-        </li>
-    <% }) %> 
-</ul>
+    <div class="d-flex justify-content-center" style="margin-top: 50px;">
+        <ul class="list-group" style="width: 40%;">
+            <a class="list-group-item list-group-item-action list-group-item-danger" href="/akademi/ogrenciekle">Öğrenci Ekle</a>
+            <% students.forEach(student => { %> 
+                <a class="list-group-item list-group-item-action list-group-item-success" href="/akademi/ogrencibilgi/<%= student._id %> "><%= student.studentName %> </a>
+                <li class="list-group-item list-group-item-">Öğrenci ID :  <%= student._id %> </li>
+                <li class="list-group-item list-group-item-">Kayıt Tarihi :  <%= student.createdAt.toLocaleDateString() %> </li>
+            <% }) %> 
+        </ul>
+    </div>
 
 </section>
 

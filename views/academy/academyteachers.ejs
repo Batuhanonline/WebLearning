@@ -3,16 +3,16 @@
 <%-include('../inc/site-navbar-academy')%> 
 
 <section>
-    <h3>Öğretmenler</h1>
-    <a href="/akademi/ogretmenekle">Öğretmen Ekle</a>
-    <ul>
-        <% teachers.forEach(teacher => { %> 
-            <li>
-                <a href=""><%= teacher.teacherName %> </a>
-                <p>Öğretmen ID :  <%= teacher._id %> </p>
-            </li>
-        <% }) %> 
-    </ul>
+    <div class="d-flex justify-content-center" style="margin-top: 50px;">
+        <ul class="list-group " style="width: 40%;">
+            <a class="list-group-item list-group-item-action list-group-item-danger" href="/akademi/ogretmenekle">Öğretmen Ekle</a>
+            <% teachers.forEach(teacher => { %> 
+                <a href="#" class="list-group-item list-group-item-action list-group-item-success"><%= teacher.teacherName %> </a>
+                <li class="list-group-item list-group-item-">Öğretmen ID :  <%= teacher._id %> </li>
+                <li class="list-group-item list-group-item-">Kayıt Tarihi :  <%= teacher.createdAt.toLocaleDateString() %> </li>
+            <% }) %> 
+        </ul>
+    </div>
 </section>
 
 

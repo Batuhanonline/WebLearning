@@ -3,14 +3,34 @@
 <%-include('../inc/site-navbar-academy')%> 
 
 <section>
-    <form action="" method="post">
-        <input type="text" name="studentName" placeholder="Öğrenci İsim" required><br>
-        <input type="text" name="studentLoginID" placeholder="ID" required><br>
-        <input type="password" name="studentPassword" placeholder="Şİfre" required><br>
-        <input type="checkbox" name="academyID" value="<%= academy._id %>">
-        <label for="academyID">Kayıt İşlemini Onaylayınız</label><br>
-        <input type="submit" value="Kayıt">
-    </form>
+    <div class="d-flex justify-content-center" style="margin-top: 100px;">
+        <div class="card" style="width: 35%;">
+            <div class="card-header">
+                <h1>Öğrenci Kayıt</h1>
+            </div>
+            <div class="card-body">
+                <form action="" method="post">
+                    <div class="mb-3">
+                        <label for="studentName" class="form-label">Öğrenci İsim</label>
+                        <input class="form-control" id="studentName" type="text" name="studentName" placeholder="İsim" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentLoginID" class="form-label">Öğrenci ID</label>
+                        <input class="form-control" id="studentLoginID" type="text" name="studentLoginID" placeholder="ID" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentPassword" class="form-label">Şifre</label>
+                        <input class="form-control" type="password" id="studentPassword" name="studentPassword" placeholder="Şİfre" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input class="form-check-input" type="checkbox" id="academyID" name="academyID" value="<%= academy._id %>" required>
+                        <label for="academyID" class="form-label">Kayıt İşlemini Onaylayınız</label>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Kayıt">
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 
 <%-include('../inc/site-footer.ejs')%> 
