@@ -5,12 +5,13 @@ const jwt = require('jsonwebtoken')
 const res = require('express/lib/response')
 
 const academy_index_get = (req,res) => {
-    Student.find().sort({ createdAt: -1 })
+    const academyID = req.params.id
+    Student.find({ academyID: academyID }).sort({ createdAt: -1 })
         .then((result) => {
             const student = result
-            Teacher.find().sort({ createdAt: -1 })
+            Teacher.find({ academyID: academyID }).sort({ createdAt: -1 })
                 .then((result) => {
-                    res.render('academy/academyindex',{title: 'Akademi-Anasayfa', teachers: result, students: student})
+                    res.render('academy/academyindex',{title: 'Akademi-Anasayfa', teachers: result, students: student, academyID: academyID})
                 })
                 .catch((err) => {
                     console.log(err)
@@ -23,9 +24,10 @@ const academy_index_get = (req,res) => {
 }
 
 const academy_teachers_get = (req, res) => {
-    Teacher.find().sort({ createdAt: -1 })
+    const academyID = req.params.id
+    Teacher.find({ academyID: academyID }).sort({ createdAt: -1 })
         .then((result) => {
-            res.render('academy/academyteachers', { title: 'Akademi-Öğretmenler', teachers:result })
+            res.render('academy/academyteachers', { title: 'Akademi-Öğretmenler', teachers:result, academyID: academyID })
         })
         .catch((err) => {
             console.log(err)
@@ -33,9 +35,10 @@ const academy_teachers_get = (req, res) => {
 }
 
 const academy_students_get = (req, res) => {
-    Student.find().sort({ createdAt: -1 })
+    const academyID = req.params.id
+    Student.find({ academyID: academyID }).sort({ createdAt: -1 })
         .then((result) => {
-            res.render('academy/academystudents', { title: 'Akademi-Öğrenciler', students: result })
+            res.render('academy/academystudents', { title: 'Akademi-Öğrenciler', students: result, academyID: academyID })
         })
         .catch((err) => {
             console.log(err)
@@ -44,11 +47,12 @@ const academy_students_get = (req, res) => {
 
 const academy_student_info_get = (req, res) => {
     const studentID = req.params.student
+    const academyID = req.params.id
     console.log(studentID)
     Student.findById(studentID)
         .then((result) => {
             const student = result
-            Teacher.find().sort({ createdAt: -1 })
+            Teacher.find({ academyID: academyID }).sort({ createdAt: -1 })
                 .then((result) => {
                     res.render('academy/academystudentinfo',{title: 'Akademi-Öğrenci Bilgi', teachers: result, student: student})
                 })
@@ -88,14 +92,16 @@ const academy_student_info_post = (req, res) => {
 }
 
 const academy_teacher_add_get = (req,res) => {
+    const academyID = req.params.id
     res.render('academy/teacheradd',{title: 'Akademi-Öğretmen Ekle'})
 }
 
 const academy_teacher_add_post = (req,res) => {
+    const academyID = req.params.id
     const teacher = new Teacher(req.body)
     teacher.save()
         .then((result) => {
-            res.redirect('/akademi')
+            res.redirect('/akademi/'+academyID)
         }).catch((err) => {
             console.log(err)
         })
@@ -106,11 +112,12 @@ const academy_student_add_get = (req, res) => {
 }
 
 const academy_student_add_post = (req, res) => {
+    const academyID = req.params.id
     console.log(req.body)
     const student = new Student(req.body)
     student.save()
         .then((result) => {
-            res.redirect('/akademi')
+            res.redirect('/akademi/'+academyID)
         }).catch((err) => {
             console.log(err)
         })

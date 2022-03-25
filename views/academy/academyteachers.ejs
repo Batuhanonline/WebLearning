@@ -5,7 +5,7 @@
 <section>
     <div class="d-flex justify-content-center" style="margin-top: 50px;">
         <ul class="list-group " style="width: 40%;">
-            <a class="list-group-item list-group-item-action list-group-item-danger" href="/akademi/ogretmenekle">Öğretmen Ekle</a>
+            <a class="list-group-item list-group-item-action list-group-item-danger" href="/akademi/<%= academyID %>/ogretmenekle">Öğretmen Ekle</a>
             <% teachers.forEach(teacher => { %> 
                 <a href="#" class="list-group-item list-group-item-action list-group-item-success"><%= teacher.teacherName %> </a>
                 <li class="list-group-item list-group-item-">Öğretmen ID :  <%= teacher._id %> </li>

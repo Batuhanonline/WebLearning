@@ -10,7 +10,6 @@ router.get('/:id/dersicerikleri', studentController.student_lessons_get)
 router.get('/:id/:lesson/dersdetayi', studentController.student_lesson_detail_get)
 
 router.get('/:id/test', studentController.student_tests_get)
-
 router.get('/:id/:test/test', studentController.questions_get)
 router.post('/:id/:test/test', studentController.questions_post)
 

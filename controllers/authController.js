@@ -44,7 +44,8 @@ const academy_login_post = async (req, res) => {
         const academy = await Academy.login(academyLoginID,academyPassword)
         const token = createToken(academy._id)
         res.cookie('token', token, {httpOnly: true, maxAge: maxAge * 1000 })
-        res.redirect('/akademi')
+        const url = '/akademi/'+academy._id
+        res.redirect(url)
     }catch(err){
         console.log(err)
     }
