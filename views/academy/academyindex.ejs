@@ -21,7 +21,7 @@
         <ul class="list-group" style="width: 40%;">
             <a class="list-group-item list-group-item-action list-group-item-danger" href="/akademi/<%= academyID %>/ogrenciekle">Öğrenci Ekle</a>
             <% students.forEach(student => { %> 
-                <a class="list-group-item list-group-item-action list-group-item-success" href="/akademi/ogrencibilgi/<%= student._id %> "><%= student.studentName %> </a>
+                <a class="list-group-item list-group-item-action list-group-item-success" href="/akademi/<%= academyID %>/ogrencibilgi/<%= student._id %> "><%= student.studentName %> </a>
                 <li class="list-group-item list-group-item-">Öğrenci ID :  <%= student._id %> </li>
                 <li class="list-group-item list-group-item-">Kayıt Tarihi :  <%= student.createdAt.toLocaleDateString() %> </li>
             <% }) %> 

@@ -3,14 +3,19 @@
 <%-include('../inc/site-navbar-student')%> 
 
 <div class="container">
-    <h1 class="mb-1"><%= lesson.lessonTitle %> </h1>
-    <div class="text-muted">
-        <%= lesson.createdAt.toLocaleDateString() %> 
+    <div class="card">
+        <div class="card-header">
+            <h1 class="mb-1"><%= lesson.lessonTitle %> </h1>
+            <div class="text-muted">
+                <%= lesson.createdAt.toLocaleDateString() %> 
+            </div>
+            <a href="/ogrenci/<%= studentID %>/dersicerikleri" class="btn btn-secondary">Diğer Dersler</a>
+        </div>
+        <div class="card-body" style="min-height: 400px;">
+            <%- lesson.sanitizedHtml %> 
+        </div>
     </div>
-    <a href="/ogrenci/<%= studentID %>/dersicerikleri" class="btn btn-secondary">Diğer Dersler</a>
-    <div>
-        <%- lesson.sanitizedHtml %> 
-    </div>
+    
 </div>
 
 

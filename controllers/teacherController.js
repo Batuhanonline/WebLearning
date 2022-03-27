@@ -150,7 +150,7 @@ const lesson_content_post = (req, res) => {
 const teacher_test_get = (req,res) => {
     
     const teacherID = req.params.id
-    LessonAfterTest.find({ lessonTeacher: teacherID }, (err, result) => {
+    LessonAfterTest.find({ teacherID: teacherID }, (err, result) => {
         if (err) {
             console.log(err)
         } else {
