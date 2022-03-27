@@ -1,25 +1,33 @@
 <%- include('../inc/site-head.ejs') %> 
 <%- include('../inc/site-navbar-teacher.ejs') %> 
 
-<section>
-    <h1>Ders İçeriği Düzenleme</h1>
-    <form action="" method="post">
-        <div class="form-group">
-            <label for="lessonTitle">Başlık</label>
-            <input type="text" name="lessonTitle"  class="form-control" value="<%= lesson.lessonTitle %> " required>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Ders İçeriği Düzenleme</h1>
         </div>
-        <div class="form-group">
-            <label for="lessonDescription">Kısa Açıklama</label>
-            <textarea class="form-control" name="lessonDescription"  id="lessonDescription" cols="20" rows="10" required><%= lesson.lessonDescription %> </textarea>
+        <div class="card-body">
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="lessonTitle">Başlık</label>
+                    <input type="text" name="lessonTitle"  class="form-control" value="<%= lesson.lessonTitle %> " required>
+                </div>
+                <div class="form-group">
+                    <label for="lessonDescription">Kısa Açıklama</label>
+                    <textarea class="form-control" name="lessonDescription"  id="lessonDescription" cols="20" rows="10" required><%= lesson.lessonDescription %> </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="lessonSubject">Ders İçeriği</label>
+                    <textarea name="lessonSubject" id="lessonSubject" class="form-control" cols="30" rows="10"><%= lesson.lessonSubject %> </textarea>
+                </div>
+        
+                <button class="btn btn-success" type="submit" style="margin-top: 10px; margin-left: 92%;">Kaydet</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="lessonSubject">Ders İçeriği</label>
-            <textarea name="lessonSubject" id="lessonSubject" class="form-control" cols="30" rows="10"><%= lesson.lessonSubject %> </textarea>
-        </div>
-
-        <button class="btn btn-primary" type="submit">Kaydet</button>
-    </form>
-</section>
+    </div>
+    
+    
+</div>
 
 
 

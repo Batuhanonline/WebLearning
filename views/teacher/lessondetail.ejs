@@ -3,15 +3,20 @@
 <%-include('../inc/site-navbar-teacher')%> 
 
 <div class="container">
-    <h1 class="mb-1"><%= lesson.lessonTitle %> </h1>
-    <div class="text-muted">
-        <%= lesson.createdAt.toLocaleDateString() %> 
+    <div class="card">
+        <div class="card-header">
+            <h1 class="mb-1"><%= lesson.lessonTitle %> </h1>
+            <div class="text-muted">
+                <%= lesson.createdAt.toLocaleDateString() %> 
+            </div>
+            <a href="/ogretmen/<%= teacherID %>/dersicerikleri" class="btn btn-secondary">Diğer Dersler</a>
+            <a href="/ogretmen/<%= teacherID %>/<%= lesson.id %>/duzenle" class="btn btn-info">Düzenle</a>
+        </div>
+        <div class="card-body" style="min-height: 400px;">
+            <%- lesson.sanitizedHtml %> 
+        </div>
     </div>
-    <a href="/ogretmen/<%= teacherID %>/dersicerikleri" class="btn btn-secondary">Diğer Dersler</a>
-    <a href="/ogretmen/<%= teacherID %>/<%= lesson.id %>/duzenle" class="btn btn-info">Düzenle</a>
-    <div>
-        <%- lesson.sanitizedHtml %> 
-    </div>
+    
 </div>
 
 
