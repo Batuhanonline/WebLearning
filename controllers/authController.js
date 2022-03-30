@@ -5,9 +5,11 @@ const Teacher = require('../models/teacher')
 const Student = require('../models/student')
 const jwt = require('jsonwebtoken')
 
+const jwtSecretKey = require('../config/jwt')
+
 const maxAge = 60*60*24
 const createToken = (id) => {
-    return jwt.sign({id}, 'jwtgizlikelime', {expiresIn: maxAge})
+    return jwt.sign({id}, jwtSecretKey, {expiresIn: maxAge})
 }
 
 const index_get = (req,res) => {

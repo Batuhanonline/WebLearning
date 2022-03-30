@@ -2,8 +2,9 @@ const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 
+const dbURL = require('./config/db')
 
 const teacherRoutes = require('./routes/teacherRoutes')
 const authRoutes = require('./routes/authRoutes')
@@ -26,7 +27,6 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 
 
-const dbURL = 'mongodb://localhost/weblearningplatform'
 mongoose.connect(dbURL,{
     useNewUrlParser: true,
     useUnifiedTopology: true
