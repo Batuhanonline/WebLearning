@@ -8,25 +8,33 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 quizForm">
-            <h2><%= test.testTitle %> </h2>
-            <h5><%= test.testDescription %></h5>
-            <form method="post" action="">
-                    <div class="form-control">
-                        <% test.questions.forEach((question, a) => { %>
-                            <div class="form-control mb-3">
-                        <label><%= question.question %></label>
-                        <div class="radio">
-                            <% question.options.forEach(function(option,index){ %>
-                            <label class="radio form-control">
-                             <input required  type="radio" name="answer<%= a %>" value=<%= index + 1 %>><%= option %></label>
-                            <% })%>
-                        </div>
-                    </div>
-                <% }) %>
-                
-                    <button type="submit" class="btn btn-success">Gönder</button>
+            <div class="card">
+                <div class="card-header">
+                    <h2><%= test.testTitle %> </h2>
+                    <h5><%= test.testDescription %></h5>
                 </div>
-            </form>
+                <div class="card-body">
+                    <form method="post" action="">
+                        <div class="form-control">
+                            <% test.questions.forEach((question, a) => { %>
+                                <div class="form-control border-success mb-3">
+                                <%- question.sanitizedHtml %>
+                                <div class="radio" style="margin-top: 35px;">
+                                <% question.options.forEach(function(option,index){ %>
+                                <label class="radio form-control" style="margin-top: 5px;">
+                                 <input required  type="radio" name="answer<%= a %>" value=<%= index + 1 %>><%= option %></label>
+                                <% })%>
+                                </div>
+                            </div>
+                        <% }) %>
+                            
+                            <button type="submit" class="btn btn-success">Gönder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            
         </div>
     </div>
 </div>

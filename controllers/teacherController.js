@@ -210,9 +210,12 @@ const teacher_test_add_post = (req, res) => {
     const teacherID = req.params.id
     const testID = req.params.testid
     const data = req.body
+
+    const sanitizedHtml = dompurify.sanitize(marked(data.question))
     
     LessonAfterTest.updateOne({ _id: testID }, {$push: { questions: {
         question: data.question,
+        sanitizedHtml: sanitizedHtml,
         options: data.options,
         answer: data.answer
     }}})

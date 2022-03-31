@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+const { marked }= require('marked')
+const slugify = require('slugify')
+const createDomPurifier = require('dompurify')
+const { JSDOM } = require('jsdom')
+const dompurify = createDomPurifier(new JSDOM().window)
 
 const lessonAfterTestSchema = new Schema({
     testTitle: {
@@ -21,6 +26,9 @@ const lessonAfterTestSchema = new Schema({
                 type: String,
                 required: true
             },
+            sanitizedHtml: {
+                type: String
+            },
             options: [
                 {
                     type: String,
@@ -37,8 +45,6 @@ const lessonAfterTestSchema = new Schema({
     collection: 'lessonAfterTest',
     timestamps: true
 })
-
-
 
 
 const model = mongoose.model('LessonAfterTest', lessonAfterTestSchema)
