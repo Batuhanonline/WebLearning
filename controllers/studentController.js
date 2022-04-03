@@ -175,7 +175,7 @@ const student_gamescore_detail_get = (req, res) => {
         } else {
             console.log(result.scores)
 
-            res.render('student/gamescore', { title: 'Oyun Skoru', gameLesson: result })
+            res.render('student/gamescore', { title: 'Oyun Skoru', gameLesson: result, studentID: studentID })
         }
     } )
 
