@@ -173,7 +173,8 @@ const student_gamescore_detail_get = (req, res) => {
         if (err) {
             console.log(err)
         } else {
-            console.log(result)
+            console.log(result.scores)
+
             res.render('student/gamescore', { title: 'Oyun Skoru', gameLesson: result })
         }
     } )
@@ -284,7 +285,7 @@ const questions_post = async (req, res) => {
                 answerFalse: answerFalse
             } } })
                 .then((result) => {
-                    res.redirect('/ogrenci/'+studentID+'/test')
+                    res.redirect('/ogrenci/'+studentID+'/pekistirmesonrasianket')
                 })
                 .catch((err) => {
                     console.log(err)
@@ -294,6 +295,18 @@ const questions_post = async (req, res) => {
 
 }
 
+
+const lessonafterform_get = (req, res) => {
+    res.render('googleforms/student/lessonafterform', { title: 'Ders Sonrası Anket' })
+}
+
+const reinforcementafterform_get = (req, res) => {
+    res.render('googleforms/student/reinforcementafterform', { title: 'Pekiştirme Sonrası Anket' })
+}
+
+const evaluationform_get = (req, res) => {
+    res.render('googleforms/student/evaluationform', { title: 'Değerlendirme Anketi' })
+}
 
 module.exports = {
     student_index_get,
@@ -309,7 +322,10 @@ module.exports = {
     student_game_detail_get,
     student_gamescore_detail_get,
     questions_get,
-    questions_post
+    questions_post,
+    lessonafterform_get,
+    reinforcementafterform_get,
+    evaluationform_get
 
 }
 

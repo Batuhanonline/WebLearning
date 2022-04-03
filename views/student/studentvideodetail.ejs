@@ -5,12 +5,23 @@
 
 <div class="text-center">
 
-    <h1 class="justify-content-center"><%= videoLesson.lessonTitle %></h1>
-    <h4 class="justify-content-center"><%= videoLesson.lessonDescription %></h4>
+    <div class="card bg-info">
+        <div class="card-header">
+            <h1 class="justify-content-center"><%= videoLesson.lessonTitle %></h1>
+            <h4 class="justify-content-center"><%= videoLesson.lessonDescription %></h4>
+        </div>
+        <div class="card-body">
+            <iframe class="justify-content-center" width="1080" height="607.5" src="https://www.youtube.com/embed/<%= videoLesson.lessonVideoURL %>"
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="card-footer">
+            <a href="/ogrenci/<%= studentID %>/pekistirmesonrasianket" class="btn btn-success">Pekiştirme Sonrası Test Anketi</a>
+        </div>
+    </div>
 
-    <iframe class="justify-content-center" width="1080" height="607.5" src="https://www.youtube.com/embed/<%= videoLesson.lessonVideoURL %>"
-    title="YouTube video player" frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    
+    
 
 </div>
 

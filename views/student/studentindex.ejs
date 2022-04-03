@@ -4,6 +4,41 @@
 
 <section class="hero">
     <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 30px;">
+            <div class="col">
+                <div class="card text-dark bg-success mb-3" >
+                    <div class="card-header">Ders Sonrası Test Anketi</div>
+                    <div class="card-body">
+                      <p class="card-text">Dersler sekmesinden işlediğiniz ders sonrasında girmeniz gereken anket testidir. Aldığınız puan bir şey etkilemez.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/ogrenci/<%= studentID %>/derssonrasianket" class="btn btn-info">Ankete git</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-dark bg-success mb-3" >
+                    <div class="card-header">Pekiştirme Sonrası Test Anketi</div>
+                    <div class="card-body">
+                      <p class="card-text">Seçildiğiniz pekiştirme yönteminin sekmesinden yaptığınız pekiştirme sonrasında girmeniz gereken anket testidir. Aldığınız puan bir şey etkilemez.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/ogrenci/<%= studentID %>/pekistirmesonrasianket" class="btn btn-info">Ankete git</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-dark bg-success mb-3" >
+                    <div class="card-header">Eğitim Sonrası Memnuniyet Anketi</div>
+                    <div class="card-body">
+                      <p class="card-text">Eğitim sonunda derecelendirme anketidir. Ders ve pekiştirme sonrasında katılınız.  Katılımlarınız için teşekkür ederim.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/ogrenci/<%= studentID %>/egitimsonrasianket" class="btn btn-info">Ankete git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <% lessons.forEach(lesson => { %>
                 <div class="col">

@@ -30,6 +30,15 @@ router.post('/:id/:lesson/oyundersi', studentController.student_game_detail_post
 router.get('/:id/:lesson/oyunskoru', studentController.student_gamescore_detail_get)
 
 
+//---------------------Google Form URL-------------------------
+router.get('/:id/derssonrasianket', studentController.lessonafterform_get)
+router.get('/:id/pekistirmesonrasianket', studentController.reinforcementafterform_get)
+router.get('/:id/egitimsonrasianket', studentController.evaluationform_get)
+
+
+
+
+
 
 
 
